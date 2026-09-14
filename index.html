@@ -1181,7 +1181,22 @@
     (function () {
         'use strict';
 
-        // Caminho dos endpoints PHP. Ajuste se a pasta api/ não estiver na raiz do site.
+        /**
+         * Onde estão os endpoints PHP.
+         *
+         * '/api'  -> a pasta api/ está na raiz DESTE domínio (caso normal).
+         *
+         * Se esta página estiver em uma hospedagem que NÃO executa PHP
+         * (GitHub Pages, Vercel, Netlify, Cloudflare Pages), o checkout não
+         * funciona com '/api': um POST em arquivo estático devolve HTTP 405.
+         * Nesse caso, aponte para o domínio que roda PHP — o mesmo da sua
+         * outra página, por exemplo:
+         *
+         *   const API = 'https://seudominio-com-php.com.br/api';
+         *
+         * E acrescente o domínio DESTA página em 'allowed_origins' no
+         * config.php, senão o navegador bloqueia a chamada por CORS.
+         */
         const API = '/api';
 
         // Preços só para exibição — quem define o valor cobrado é o servidor.

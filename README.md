@@ -197,6 +197,50 @@ o legítimo e recusa assinatura falsa, replay e requisição sem header:
 O segredo é lido do `config.php`; nunca passe por argumento, porque a linha de
 comando fica visível para outros processos e no histórico do shell.
 
+## Hospedagem: o PHP precisa rodar
+
+O checkout é PHP. Uma hospedagem estática (GitHub Pages, Vercel, Netlify,
+Cloudflare Pages) **não executa PHP**: o arquivo é servido como texto e um POST
+nele devolve **HTTP 405 sem JSON**. Se o erro da página for esse, o problema é
+a hospedagem, não a configuração.
+
+Teste em 10 segundos — abra no navegador:
+
+```
+https://SEU-DOMINIO/api/status.php
+```
+
+- Voltou JSON (`{"erro":"transactionId inválido."}` ou
+  `{"erro":"Servidor não configurado."}`) → **o PHP está rodando**, siga para o
+  diagnóstico.
+- Apareceu código-fonte, baixou um arquivo, ou deu 404/405 → **o PHP não roda
+  nesse domínio**.
+
+Duas saídas:
+
+1. **Suba o site inteiro numa hospedagem com PHP 8 + cURL** (a mesma da sua
+   outra página, por exemplo). É o caminho mais simples: tudo funciona sem
+   mexer em nada.
+2. **Deixe a página onde está e use a API no domínio que tem PHP.** No
+   `index.html`, troque a constante do checkout:
+
+   ```js
+   const API = 'https://seudominio-com-php.com.br/api';
+   ```
+
+   e acrescente o domínio da página em `allowed_origins` no `config.php`:
+
+   ```php
+   'allowed_origins' => [
+       'https://dominio-da-pagina.com.br',
+       'https://www.dominio-da-pagina.com.br',
+   ],
+   ```
+
+   Sem isso o navegador bloqueia por CORS. O mini app (`app/`) é estático e
+   roda em qualquer lugar, mas `app/` e `api/` precisam estar no mesmo domínio
+   entre si.
+
 ## Se o PIX não gerar
 
 **Antes de tudo**, a página agora diz o motivo na própria tela: se der HTTP 404
