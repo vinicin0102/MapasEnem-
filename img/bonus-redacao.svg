@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" width="600" height="800" role="img" aria-label="Bônus: 10 segredos para tirar 900+ na redação do ENEM">
+
+  <defs>
+    <linearGradient id="gq" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#7C3AED"/><stop offset="100%" stop-color="#C084FC"/>
+    </linearGradient>
+    <linearGradient id="gr" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#B45309"/><stop offset="55%" stop-color="#F59E0B"/><stop offset="100%" stop-color="#FDE68A"/>
+    </linearGradient>
+    <filter id="sb" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#0F172A" flood-opacity="0.22"/>
+    </filter>
+    <filter id="sp" x="-40%" y="-40%" width="180%" height="180%">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#0F172A" flood-opacity="0.16"/>
+    </filter>
+    <pattern id="gd" width="26" height="26" patternUnits="userSpaceOnUse">
+      <path d="M26 0H0V26" fill="none" stroke="#E2E8F0" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="600" height="800" rx="34" fill="#0F172A"/>
+  <rect width="600" height="800" rx="34" fill="url(#gr)" opacity="0.96"/>
+  <g opacity="0.12">
+    <circle cx="520" cy="120" r="180" fill="#FFFFFF"/><circle cx="60" cy="700" r="150" fill="#FFFFFF"/>
+  </g>
+  <rect x="60" y="56" width="214" height="38" rx="19" fill="#0F172A" fill-opacity="0.35"/>
+  <text x="167" y="82" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="900" fill="#FDE68A" letter-spacing="2">ORDER BUMP VIP</text>
+  <text x="60" y="176" font-family="Inter, Arial, sans-serif" font-size="70" font-weight="900" fill="#FFFFFF">10 SEGREDOS</text>
+  <text x="60" y="230" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="800" fill="#FFF7ED">para tirar <tspan font-size="40" font-weight="900" fill="#FDE68A">900+</tspan> na redação</text>
+  <text x="60" y="268" font-family="Inter, Arial, sans-serif" font-size="19" font-weight="700" fill="#FFFFFF" fill-opacity="0.85">em qualquer tema que cair no ENEM</text>
+  <line x1="60" y1="300" x2="540" y2="300" stroke="#FFFFFF" stroke-opacity="0.3" stroke-width="2"/>
+  <g>
+    <circle cx="112" cy="348" r="21" fill="#FFFFFF" fill-opacity="0.18"/>
+    <text x="112" y="355" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="900" fill="#FDE68A">1</text>
+    <text x="148" y="355" font-family="Inter, Arial, sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">Argumentos universais de tema</text></g>
+  <g>
+    <circle cx="112" cy="408" r="21" fill="#FFFFFF" fill-opacity="0.18"/>
+    <text x="112" y="415" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="900" fill="#FDE68A">2</text>
+    <text x="148" y="415" font-family="Inter, Arial, sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">Palavras-chave que puxam a nota</text></g>
+  <g>
+    <circle cx="112" cy="468" r="21" fill="#FFFFFF" fill-opacity="0.18"/>
+    <text x="112" y="475" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="900" fill="#FDE68A">3</text>
+    <text x="148" y="475" font-family="Inter, Arial, sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">Repertórios coringa (4 áreas)</text></g>
+  <g>
+    <circle cx="112" cy="528" r="21" fill="#FFFFFF" fill-opacity="0.18"/>
+    <text x="112" y="535" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="900" fill="#FDE68A">4</text>
+    <text x="148" y="535" font-family="Inter, Arial, sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">Estrutura de parágrafo nota 200</text></g>
+  <g>
+    <circle cx="112" cy="588" r="21" fill="#FFFFFF" fill-opacity="0.18"/>
+    <text x="112" y="595" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="900" fill="#FDE68A">5</text>
+    <text x="148" y="595" font-family="Inter, Arial, sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">Proposta de intervenção completa</text></g>
+  <rect x="60" y="640" width="480" height="92" rx="24" fill="#0F172A" fill-opacity="0.45"/>
+  <text x="88" y="676" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="700" fill="#FFFFFF" fill-opacity="0.8">+ 5 segredos que quase ninguém usa</text>
+  <text x="88" y="712" font-family="Inter, Arial, sans-serif" font-size="26" font-weight="900" fill="#FDE68A">Só R$ 15,99 no checkout</text>
+</svg>

@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" width="600" height="800" role="img" aria-label="Mapas mentais de Matemática">
+
+  <defs>
+    <linearGradient id="gc0" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2563EB"/>
+      <stop offset="100%" stop-color="#60A5FA"/>
+    </linearGradient>
+    <linearGradient id="telac0" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#F1F5F9"/>
+    </linearGradient>
+    <filter id="sombrac0" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#0F172A" flood-opacity="0.22"/>
+    </filter>
+    <filter id="sombrinhac0" x="-40%" y="-40%" width="180%" height="180%">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#0F172A" flood-opacity="0.16"/>
+    </filter>
+    <pattern id="gradec0" width="26" height="26" patternUnits="userSpaceOnUse">
+      <path d="M26 0H0V26" fill="none" stroke="#E2E8F0" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="600" height="800" rx="34" fill="#FFFFFF"/>
+  <rect width="600" height="800" rx="34" fill="url(#gradec0)" opacity="0.7"/>
+  <rect width="600" height="300" rx="34" fill="url(#gc0)"/>
+  <rect y="250" width="600" height="50" fill="url(#gc0)"/>
+  <text x="300" y="96" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="900" fill="#FFFFFF" fill-opacity="0.85" letter-spacing="3">MAPAS ENEM</text>
+  <text x="300" y="168" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="38" font-weight="900" fill="#FFFFFF"><tspan x="300" dy="0">Matemática</tspan></text>
+  <rect x="200" y="222" width="200" height="40" rx="20" fill="#FFFFFF" fill-opacity="0.25"/>
+  <text x="300" y="249" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="800" fill="#FFFFFF">MAPAS MENTAIS</text>
+  <path d="M300 520 C336.3 488.4 332.7 371.7 340.6 361.9" fill="none" stroke="#2563EB" stroke-width="2.6" stroke-linecap="round" opacity="0.75"/><circle cx="340.6" cy="361.9" r="3.5" fill="#2563EB"/><path d="M340.6 361.9 Q356.6 353.9 341.1 347.6" fill="none" stroke="#2563EB" stroke-width="1.4" opacity="0.35"/><path d="M340.6 361.9 Q356.6 369.9 353.1 376.2" fill="none" stroke="#2563EB" stroke-width="1.4" opacity="0.35"/><g filter="url(#sombrinhac0)"><rect x="303.6" y="324.9" width="74.0" height="30" rx="15" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.5"/><text x="340.6" y="344.4" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700" fill="#0F172A">Funções</text></g><path d="M300 520 C397.9 510.3 443.1 474.6 477.5 471.6" fill="none" stroke="#60A5FA" stroke-width="2.6" stroke-linecap="round" opacity="0.75"/><circle cx="477.5" cy="471.6" r="3.5" fill="#60A5FA"/><path d="M477.5 471.6 Q493.5 463.6 500.1 457.3" fill="none" stroke="#60A5FA" stroke-width="1.4" opacity="0.35"/><path d="M477.5 471.6 Q493.5 479.6 512.1 485.9" fill="none" stroke="#60A5FA" stroke-width="1.4" opacity="0.35"/><g filter="url(#sombrinhac0)"><rect x="436.3" y="434.6" width="82.5" height="30" rx="15" fill="#FFFFFF" stroke="#60A5FA" stroke-width="1.5"/><text x="477.5" y="454.1" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700" fill="#0F172A">Geometria</text></g><path d="M300 520 C379.6 541.9 410.4 622.9 436.9 629.7" fill="none" stroke="#2563EB" stroke-width="2.6" stroke-linecap="round" opacity="0.75"/><circle cx="436.9" cy="629.7" r="3.5" fill="#2563EB"/><path d="M436.9 629.7 Q452.9 621.7 453.0 615.4" fill="none" stroke="#2563EB" stroke-width="1.4" opacity="0.35"/><path d="M436.9 629.7 Q452.9 637.7 465.0 644.0" fill="none" stroke="#2563EB" stroke-width="1.4" opacity="0.35"/><g filter="url(#sombrinhac0)"><rect x="382.2" y="592.7" width="109.4" height="30" rx="15" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.5"/><text x="436.9" y="612.2" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700" fill="#0F172A">Probabilidade</text></g><path d="M300 520 C299.7 551.6 267.3 668.3 259.4 678.1" fill="none" stroke="#60A5FA" stroke-width="2.6" stroke-linecap="round" opacity="0.75"/><circle cx="259.4" cy="678.1" r="3.5" fill="#60A5FA"/><path d="M259.4 678.1 Q275.4 670.1 246.9 663.8" fill="none" stroke="#60A5FA" stroke-width="1.4" opacity="0.35"/><path d="M259.4 678.1 Q275.4 686.1 258.9 692.4" fill="none" stroke="#60A5FA" stroke-width="1.4" opacity="0.35"/><g filter="url(#sombrinhac0)"><rect x="211.4" y="641.1" width="95.9" height="30" rx="15" fill="#FFFFFF" stroke="#60A5FA" stroke-width="1.5"/><text x="259.4" y="660.6" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700" fill="#0F172A">Porcentagem</text></g><path d="M300 520 C238.1 529.7 156.9 565.4 122.5 568.4" fill="none" stroke="#2563EB" stroke-width="2.6" stroke-linecap="round" opacity="0.75"/><circle cx="122.5" cy="568.4" r="3.5" fill="#2563EB"/><path d="M122.5 568.4 Q138.5 560.4 87.9 554.1" fill="none" stroke="#2563EB" stroke-width="1.4" opacity="0.35"/><path d="M122.5 568.4 Q138.5 576.4 99.9 582.7" fill="none" stroke="#2563EB" stroke-width="1.4" opacity="0.35"/><g filter="url(#sombrinhac0)"><rect x="74.5" y="531.4" width="95.9" height="30" rx="15" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.5"/><text x="122.5" y="550.9" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700" fill="#0F172A">Estatística</text></g><path d="M300 520 C256.4 498.1 189.6 417.1 163.1 410.3" fill="none" stroke="#60A5FA" stroke-width="2.6" stroke-linecap="round" opacity="0.75"/><circle cx="163.1" cy="410.3" r="3.5" fill="#60A5FA"/><path d="M163.1 410.3 Q179.1 402.3 135.0 396.0" fill="none" stroke="#60A5FA" stroke-width="1.4" opacity="0.35"/><path d="M163.1 410.3 Q179.1 418.3 147.0 424.6" fill="none" stroke="#60A5FA" stroke-width="1.4" opacity="0.35"/><g filter="url(#sombrinhac0)"><rect x="115.1" y="373.3" width="95.9" height="30" rx="15" fill="#FFFFFF" stroke="#60A5FA" stroke-width="1.5"/><text x="163.1" y="392.8" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700" fill="#0F172A">Progressões</text></g>
+  <g filter="url(#sombrinhac0)">
+    <rect x="212" y="492" width="176" height="56" rx="28" fill="url(#gc0)"/>
+    <text x="300" y="528" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="19" font-weight="900" fill="#FFFFFF">MATEMÁTICA</text>
+  </g>
+  <text x="300" y="760" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700" fill="#64748B">O que mais cai no ENEM em 1 imagem</text>
+</svg>

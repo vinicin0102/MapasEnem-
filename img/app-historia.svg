@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="152 22 496 956" width="496" height="956" role="img" aria-label="Mapa mental de História no app Mapas ENEM">
+
+  <defs>
+    <linearGradient id="gt2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#FCD34D"/>
+    </linearGradient>
+    <linearGradient id="telat2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#F1F5F9"/>
+    </linearGradient>
+    <filter id="sombrat2" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#0F172A" flood-opacity="0.22"/>
+    </filter>
+    <filter id="sombrinhat2" x="-40%" y="-40%" width="180%" height="180%">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#0F172A" flood-opacity="0.16"/>
+    </filter>
+    <pattern id="gradet2" width="26" height="26" patternUnits="userSpaceOnUse">
+      <path d="M26 0H0V26" fill="none" stroke="#E2E8F0" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <g filter="url(#sombrat2)">
+    <rect x="170" y="40" width="460" height="920" rx="56" fill="#0F172A"/>
+    <rect x="182" y="52" width="436" height="896" rx="46" fill="url(#telat2)"/>
+  </g>
+  <rect x="182" y="52" width="436" height="896" rx="46" fill="url(#gradet2)" opacity="0.6"/>
+  <rect x="340" y="62" width="120" height="22" rx="11" fill="#0F172A"/>
+  <text x="212" y="108" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700" fill="#64748B">09:41</text>
+  <g fill="#64748B"><rect x="540" y="98" width="20" height="10" rx="3"/><rect x="566" y="96" width="30" height="12" rx="3"/></g>
+  <rect x="182" y="124" width="436" height="86" fill="url(#gt2)"/>
+  <text x="212" y="158" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="900" fill="#FFFFFF" letter-spacing="2">MAPAS ENEM</text>
+  <text x="212" y="186" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="800" fill="#FFFFFF">História</text>
+  <g opacity="0.9"><rect x="520" y="150" width="76" height="30" rx="15" fill="#FFFFFF" fill-opacity="0.22"/>
+  <text x="558" y="170" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="800" fill="#FFFFFF">1 / 12</text></g>
+  <rect x="206" y="236" width="388" height="620" rx="26" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
+  <text x="400" y="278" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="800" fill="#94A3B8" letter-spacing="2">MAPA MENTAL</text>
+  <g font-family="Inter, Arial, sans-serif" font-size="11" font-weight="700">
+    <rect x="232" y="296" width="102" height="26" rx="13" fill="#F59E0B" fill-opacity="0.12"/><text x="283" y="313" text-anchor="middle" fill="#F59E0B">Resumo visual</text>
+    <rect x="344" y="296" width="112" height="26" rx="13" fill="#F59E0B" fill-opacity="0.12"/><text x="400" y="313" text-anchor="middle" fill="#F59E0B">Fórmulas-chave</text>
+    <rect x="466" y="296" width="102" height="26" rx="13" fill="#F59E0B" fill-opacity="0.12"/><text x="517" y="313" text-anchor="middle" fill="#F59E0B">Pegadinhas</text>
+  </g>
+  <path d="M400 580 C432.5 554.2 424.4 460.9 432.3 451.2" fill="none" stroke="#F59E0B" stroke-width="2.6" stroke-linecap="round" opacity="0.75"/><circle cx="432.3" cy="451.2" r="3.5" fill="#F59E0B"/><path d="M432.3 451.2 Q448.3 443.2 432.8 436.9" fill="none" stroke="#F59E0B" stroke-width="1.4" opacity="0.35"/><path d="M432.3 451.2 Q448.3 459.2 444.8 465.5" fill="none" stroke="#F59E0B" stroke-width="1.4" opacity="0.35"/><g filter="url(#sombrinhat2)"><rect x="374.3" y="414.2" width="116.1" height="30" rx="15" fill="#FFFFFF" stroke="#F59E0B" stroke-width="1.5"/><text x="432.3" y="433.7" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700" fill="#0F172A">Brasil Colônia</text></g><path d="M400 580 C481.6 572.1 506.9 543.5 541.2 540.5" fill="none" stroke="#FCD34D" stroke-width="2.6" stroke-linecap="round" opacity="0.75"/><circle cx="541.2" cy="540.5" r="3.5" fill="#FCD34D"/><path d="M541.2 540.5 Q557.2 532.5 563.9 526.2" fill="none" stroke="#FCD34D" stroke-width="1.4" opacity="0.35"/><path d="M541.2 540.5 Q557.2 548.5 575.9 554.8" fill="none" stroke="#FCD34D" stroke-width="1.4" opacity="0.35"/><g filter="url(#sombrinhat2)"><rect x="496.6" y="503.5" width="89.2" height="30" rx="15" fill="#FFFFFF" stroke="#FCD34D" stroke-width="1.5"/><text x="541.2" y="523.0" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700" fill="#0F172A">Era Vargas</text></g><path d="M400 580 C467.0 597.9 482.4 662.6 508.9 669.4" fill="none" stroke="#F59E0B" stroke-width="2.6" stroke-linecap="round" opacity="0.75"/><circle cx="508.9" cy="669.4" r="3.5" fill="#F59E0B"/><path d="M508.9 669.4 Q524.9 661.4 525.0 655.1" fill="none" stroke="#F59E0B" stroke-width="1.4" opacity="0.35"/><path d="M508.9 669.4 Q524.9 677.4 537.0 683.7" fill="none" stroke="#F59E0B" stroke-width="1.4" opacity="0.35"/><g filter="url(#sombrinhat2)"><rect x="461.0" y="632.4" width="95.9" height="30" rx="15" fill="#FFFFFF" stroke="#F59E0B" stroke-width="1.5"/><text x="508.9" y="651.9" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700" fill="#0F172A">Guerra Fria</text></g><path d="M400 580 C403.5 605.8 375.6 699.1 367.7 708.8" fill="none" stroke="#FCD34D" stroke-width="2.6" stroke-linecap="round" opacity="0.75"/><circle cx="367.7" cy="708.8" r="3.5" fill="#FCD34D"/><path d="M367.7 708.8 Q383.7 700.8 355.2 694.5" fill="none" stroke="#FCD34D" stroke-width="1.4" opacity="0.35"/><path d="M367.7 708.8 Q383.7 716.8 367.2 723.1" fill="none" stroke="#FCD34D" stroke-width="1.4" opacity="0.35"/><g filter="url(#sombrinhat2)"><rect x="323.1" y="671.8" width="89.2" height="30" rx="15" fill="#FFFFFF" stroke="#FCD34D" stroke-width="1.5"/><text x="367.7" y="691.3" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700" fill="#0F172A">Revoluções</text></g><path d="M400 580 C354.4 587.9 293.1 616.5 258.8 619.5" fill="none" stroke="#F59E0B" stroke-width="2.6" stroke-linecap="round" opacity="0.75"/><circle cx="258.8" cy="619.5" r="3.5" fill="#F59E0B"/><path d="M258.8 619.5 Q274.8 611.5 224.1 605.2" fill="none" stroke="#F59E0B" stroke-width="1.4" opacity="0.35"/><path d="M258.8 619.5 Q274.8 627.5 236.1 633.8" fill="none" stroke="#F59E0B" stroke-width="1.4" opacity="0.35"/><g filter="url(#sombrinhat2)"><rect x="220.9" y="582.5" width="75.8" height="30" rx="15" fill="#FFFFFF" stroke="#F59E0B" stroke-width="1.5"/><text x="258.8" y="602.0" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700" fill="#0F172A">Ditadura</text></g><path d="M400 580 C369.0 562.1 317.6 497.4 291.1 490.6" fill="none" stroke="#FCD34D" stroke-width="2.6" stroke-linecap="round" opacity="0.75"/><circle cx="291.1" cy="490.6" r="3.5" fill="#FCD34D"/><path d="M291.1 490.6 Q307.1 482.6 263.0 476.3" fill="none" stroke="#FCD34D" stroke-width="1.4" opacity="0.35"/><path d="M291.1 490.6 Q307.1 498.6 275.0 504.9" fill="none" stroke="#FCD34D" stroke-width="1.4" opacity="0.35"/><g filter="url(#sombrinhat2)"><rect x="243.1" y="453.6" width="95.9" height="30" rx="15" fill="#FFFFFF" stroke="#FCD34D" stroke-width="1.5"/><text x="291.1" y="473.1" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700" fill="#0F172A">Idade Média</text></g>
+  <g filter="url(#sombrinhat2)">
+    <rect x="322" y="556" width="156" height="50" rx="25" fill="url(#gt2)"/>
+    <text x="400" y="587" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="900" fill="#FFFFFF">HISTÓRIA</text>
+  </g>
+  <rect x="230" y="800" width="340" height="34" rx="17" fill="#F59E0B" fill-opacity="0.12"/>
+  <text x="400" y="822" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" fill="#F59E0B">12 mapas • 84 tópicos que mais caem</text>
+  <g>
+    <rect x="206" y="876" width="388" height="56" rx="20" fill="#0F172A"/>
+    <circle cx="266" cy="904" r="7" fill="#FCD34D"/><rect x="286" y="898" width="52" height="12" rx="6" fill="#FFFFFF" fill-opacity="0.85"/>
+    <circle cx="386" cy="904" r="7" fill="#FFFFFF" fill-opacity="0.35"/><rect x="406" y="898" width="40" height="12" rx="6" fill="#FFFFFF" fill-opacity="0.35"/>
+    <circle cx="486" cy="904" r="7" fill="#FFFFFF" fill-opacity="0.35"/><rect x="506" y="898" width="40" height="12" rx="6" fill="#FFFFFF" fill-opacity="0.35"/>
+  </g>
+</svg>

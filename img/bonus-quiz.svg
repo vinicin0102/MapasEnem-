@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="152 22 496 956" width="496" height="956" role="img" aria-label="Bônus: questionário final do app Mapas ENEM">
+
+  <defs>
+    <linearGradient id="gq" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#7C3AED"/><stop offset="100%" stop-color="#C084FC"/>
+    </linearGradient>
+    <linearGradient id="gr" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#B45309"/><stop offset="55%" stop-color="#F59E0B"/><stop offset="100%" stop-color="#FDE68A"/>
+    </linearGradient>
+    <filter id="sb" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#0F172A" flood-opacity="0.22"/>
+    </filter>
+    <filter id="sp" x="-40%" y="-40%" width="180%" height="180%">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#0F172A" flood-opacity="0.16"/>
+    </filter>
+    <pattern id="gd" width="26" height="26" patternUnits="userSpaceOnUse">
+      <path d="M26 0H0V26" fill="none" stroke="#E2E8F0" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <g filter="url(#sb)">
+    <rect x="170" y="40" width="460" height="920" rx="56" fill="#0F172A"/>
+    <rect x="182" y="52" width="436" height="896" rx="46" fill="#FFFFFF"/>
+  </g>
+  <rect x="182" y="52" width="436" height="896" rx="46" fill="url(#gd)" opacity="0.6"/>
+  <rect x="340" y="62" width="120" height="22" rx="11" fill="#0F172A"/>
+  <text x="212" y="108" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700" fill="#64748B">09:41</text>
+  <g fill="#64748B"><rect x="540" y="98" width="20" height="10" rx="3"/><rect x="566" y="96" width="30" height="12" rx="3"/></g>
+  <rect x="182" y="124" width="436" height="86" fill="url(#gq)"/>
+  <text x="212" y="158" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="900" fill="#FFFFFF" letter-spacing="2">BÔNUS · QUESTIONÁRIO</text>
+  <text x="212" y="186" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="800" fill="#FFFFFF">Você absorveu mesmo?</text>
+  <g>
+    <rect x="212" y="238" width="376" height="12" rx="6" fill="#EDE9FE"/>
+    <rect x="212" y="238" width="258" height="12" rx="6" fill="#7C3AED"/>
+    <text x="212" y="278" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="800" fill="#7C3AED">Questão 14 de 20</text>
+    <text x="588" y="278" text-anchor="end" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="800" fill="#16A34A">12 acertos</text>
+  </g>
+  <rect x="212" y="300" width="376" height="104" rx="22" fill="#F5F3FF" stroke="#DDD6FE" stroke-width="2"/>
+  <text x="236" y="336" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="900" fill="#A78BFA" letter-spacing="2">BIOLOGIA · GENÉTICA</text>
+  <text x="236" y="364" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="700" fill="#1E1B4B">Na 1ª Lei de Mendel, o cruzamento</text>
+  <text x="236" y="388" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="700" fill="#1E1B4B">Aa x Aa gera qual proporção?</text>
+  <g>
+    <rect x="232" y="430" width="336" height="60" rx="18" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="2"/>
+    <circle cx="266" cy="460" r="16" fill="#E2E8F0" fill-opacity="0.5"/>
+    <text x="266" y="466" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="900" fill="#FFFFFF">A</text>
+    <text x="294" y="466" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700" fill="#475569">1 : 1</text>
+    </g>
+  <g>
+    <rect x="232" y="502" width="336" height="60" rx="18" fill="#DCFCE7" stroke="#16A34A" stroke-width="2"/>
+    <circle cx="266" cy="532" r="16" fill="#16A34A" fill-opacity="0.9"/>
+    <text x="266" y="538" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="900" fill="#FFFFFF">B</text>
+    <text x="294" y="538" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700" fill="#166534">3 : 1</text>
+    <path d="M540 528 l8 9 16-18" fill="none" stroke="#16A34A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></g>
+  <g>
+    <rect x="232" y="574" width="336" height="60" rx="18" fill="#FEE2E2" stroke="#EF4444" stroke-width="2"/>
+    <circle cx="266" cy="604" r="16" fill="#EF4444" fill-opacity="0.9"/>
+    <text x="266" y="610" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="900" fill="#FFFFFF">C</text>
+    <text x="294" y="610" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700" fill="#991B1B">9 : 3 : 3 : 1</text>
+    <path d="M542 596 l18 18 M560 596 l-18 18" fill="none" stroke="#EF4444" stroke-width="4" stroke-linecap="round"/></g>
+  <g>
+    <rect x="232" y="646" width="336" height="60" rx="18" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="2"/>
+    <circle cx="266" cy="676" r="16" fill="#E2E8F0" fill-opacity="0.5"/>
+    <text x="266" y="682" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="900" fill="#FFFFFF">D</text>
+    <text x="294" y="682" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700" fill="#475569">1 : 2 : 1 (fenotípica)</text>
+    </g>
+  <g>
+    <rect x="232" y="718" width="336" height="60" rx="18" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="2"/>
+    <circle cx="266" cy="748" r="16" fill="#E2E8F0" fill-opacity="0.5"/>
+    <text x="266" y="754" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="900" fill="#FFFFFF">E</text>
+    <text x="294" y="754" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700" fill="#475569">100% dominante</text>
+    </g>
+  <rect x="232" y="800" width="336" height="60" rx="22" fill="#16A34A"/>
+  <text x="400" y="838" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="900" fill="#FFFFFF">VER EXPLICAÇÃO →</text>
+  <text x="400" y="898" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" fill="#64748B">Cada erro mostra o mapa onde revisar</text>
+</svg>
