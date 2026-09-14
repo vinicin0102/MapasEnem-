@@ -4,10 +4,38 @@
  * config.php está no .gitignore e NUNCA deve ser versionado.
  */
 
+/**
+ * JÁ TEM OUTRA PÁGINA ZUCKPAY FUNCIONANDO NESTE SERVIDOR?
+ *
+ * Aponte aqui o caminho do config.php dela (o do Arritmias, por exemplo) e
+ * este arquivo reaproveita o que já está comprovadamente funcionando:
+ * client_id, client_secret, api_base e webhook_secret.
+ *
+ * Assim a credencial fica em um lugar só: mudou lá, muda aqui também, e você
+ * não copia segredo de um arquivo para outro.
+ *
+ * Exemplos de caminho:
+ *   '/home/usuario/public_html/api/config.php'
+ *   __DIR__ . '/../../arritmias/api/config.php'
+ *
+ * Deixe vazio para preencher as credenciais direto neste arquivo.
+ */
+$configQueJaFunciona = '';
+
+$herdado = [];
+if ($configQueJaFunciona !== '' && is_file($configQueJaFunciona)) {
+    $lido = require $configQueJaFunciona;
+    $herdado = is_array($lido) ? $lido : [];
+}
+
 return [
-    // Credenciais da ZuckPay (painel > Integrações > API keys)
-    'client_id'     => getenv('ZUCKPAY_CLIENT_ID')     ?: 'seu_client_id',
-    'client_secret' => getenv('ZUCKPAY_CLIENT_SECRET') ?: 'seu_client_secret',
+    /**
+     * Credenciais da ZuckPay (painel > Integrações > API keys).
+     *
+     * Ordem: variável de ambiente > config herdado acima > valor escrito aqui.
+     */
+    'client_id'     => getenv('ZUCKPAY_CLIENT_ID')     ?: ($herdado['client_id']     ?? 'seu_client_id'),
+    'client_secret' => getenv('ZUCKPAY_CLIENT_SECRET') ?: ($herdado['client_secret'] ?? 'seu_client_secret'),
 
     /**
      * Base da API.
@@ -23,7 +51,7 @@ return [
      *
      * Para testes: https://www.zuckpay.com.br/conta/dev/api/pix
      */
-    'api_base' => 'https://www.zuckpay.com.br/conta/v3/pix',
+    'api_base' => $herdado['api_base'] ?? 'https://www.zuckpay.com.br/conta/v3/pix',
 
     /**
      * Planos vendidos na página.
@@ -48,14 +76,14 @@ return [
             'valor'         => 9.90,
             'exige_materia' => true,
             'prefixo'       => 'ENEM',
-            'product_id'    => 0, // TROCAR pelo id do produto no painel da ZuckPay
+            'product_id'    => 593187, // mesmo produto usado na outra página; troque se cadastrar um só do ENEM
         ],
         'completo' => [
             'nome'            => 'Mapas ENEM — Mini App Completo',
             'valor'           => 19.90,
             'inclui_materias' => true,
             'prefixo'         => 'ENEM',
-            'product_id'      => 0, // TROCAR pelo id do produto no painel da ZuckPay
+            'product_id'      => 593187, // mesmo produto usado na outra página; troque se cadastrar um só do ENEM
         ],
     ],
 
@@ -175,7 +203,7 @@ return [
      * Vazio, os postbacks continuam chegando sem assinatura e a validação
      * fica só por reconsulta à API.
      */
-    'webhook_secret' => '',
+    'webhook_secret' => $herdado['webhook_secret'] ?? '',
 
     // Origens autorizadas a chamar estes endpoints (CORS).
     'allowed_origins' => [

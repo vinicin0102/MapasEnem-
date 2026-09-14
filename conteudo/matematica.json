@@ -1,0 +1,472 @@
+{
+  "id": "matematica",
+  "nome": "Matemática",
+  "cor": "#2563EB",
+  "chamada": "No ENEM, Matemática é menos conta e mais leitura: porcentagem, proporção, grandezas e gráficos aparecem em quase metade da prova.",
+  "mapas": [
+    {
+      "id": "porcentagem",
+      "titulo": "Porcentagem e juros",
+      "chamada": "O assunto que mais cai na prova inteira",
+      "central": "PORCENTAGEM",
+      "ramos": [
+        {
+          "titulo": "Ideia básica",
+          "itens": [
+            "x% de um valor = (x / 100) x valor.",
+            "20% de 350 = 0,20 x 350 = 70.",
+            "Transforme a porcentagem em número decimal antes de calcular: 7% vira 0,07 e 130% vira 1,3."
+          ]
+        },
+        {
+          "titulo": "Fator de aumento",
+          "itens": [
+            "Aumentar 15% = multiplicar por 1,15. Aumentar 8% = multiplicar por 1,08.",
+            "Regra: 1 + (taxa / 100).",
+            "Preço de 240 com aumento de 15%: 240 x 1,15 = 276."
+          ]
+        },
+        {
+          "titulo": "Fator de desconto",
+          "itens": [
+            "Dar 30% de desconto = multiplicar por 0,70 (você paga 70%).",
+            "Regra: 1 - (taxa / 100).",
+            "Dois descontos seguidos de 10% e 20% dão 0,9 x 0,8 = 0,72, ou seja, 28% de desconto — e não 30%."
+          ]
+        },
+        {
+          "titulo": "Variação percentual",
+          "itens": [
+            "Variação = (valor final - valor inicial) / valor inicial x 100.",
+            "De 80 para 100: (100 - 80) / 80 = 0,25, ou seja, aumento de 25%.",
+            "De 100 para 80: (80 - 100) / 100 = -0,20, ou seja, queda de 20%. Subir e descer a mesma quantia não dá a mesma porcentagem."
+          ]
+        },
+        {
+          "titulo": "Juros simples",
+          "itens": [
+            "M = C x (1 + i x t). O juro incide sempre sobre o valor inicial.",
+            "C é o capital, i a taxa em decimal e t o tempo — na mesma unidade da taxa.",
+            "1000 reais a 2% ao mês por 5 meses: 1000 x (1 + 0,02 x 5) = 1100."
+          ]
+        },
+        {
+          "titulo": "Juros compostos",
+          "itens": [
+            "M = C x (1 + i) elevado a t. O juro incide sobre o montante anterior.",
+            "1000 reais a 2% ao mês por 3 meses: 1000 x 1,02 x 1,02 x 1,02 = 1061,21.",
+            "A partir do segundo período, composto é sempre maior que simples."
+          ]
+        }
+      ],
+      "pegadinhas": [
+        "Descontos sucessivos não se somam: 10% + 20% não é 30%.",
+        "Taxa e tempo precisam estar na mesma unidade. Taxa ao mês com tempo em anos? Converta antes.",
+        "Aumento de 100% é dobrar; aumento para 100% do valor é não mudar nada. Leia se o enunciado diz 'em' ou 'para'."
+      ],
+      "lembrete": "Aumentar é multiplicar por 1 + taxa. Diminuir é multiplicar por 1 - taxa. Com isso você resolve a maioria das questões de porcentagem sem armar conta."
+    },
+    {
+      "id": "proporcao",
+      "titulo": "Razão, proporção e regra de três",
+      "chamada": "Escalas, receitas, velocidade e densidade",
+      "central": "PROPORÇÃO",
+      "ramos": [
+        {
+          "titulo": "Grandezas diretas",
+          "itens": [
+            "Uma aumenta, a outra aumenta na mesma proporção.",
+            "Exemplos: quantidade de produto e preço; distância e combustível gasto.",
+            "Monte a regra de três na ordem e multiplique cruzado."
+          ]
+        },
+        {
+          "titulo": "Grandezas inversas",
+          "itens": [
+            "Uma aumenta, a outra diminui.",
+            "Exemplos: número de operários e tempo de obra; velocidade e tempo de viagem.",
+            "Inverta uma das frações antes de multiplicar cruzado."
+          ]
+        },
+        {
+          "titulo": "Escala",
+          "itens": [
+            "Escala 1:50000 significa que 1 cm no mapa vale 50000 cm no terreno, ou seja, 500 m.",
+            "Para achar a distância real: medida no mapa x denominador da escala.",
+            "Cuidado com as unidades: o resultado sai na mesma unidade que você mediu."
+          ]
+        },
+        {
+          "titulo": "Velocidade média",
+          "itens": [
+            "v = distância total / tempo total.",
+            "Não é a média das velocidades quando os trechos têm tempos diferentes.",
+            "Converter km/h em m/s: divida por 3,6. De m/s para km/h: multiplique por 3,6."
+          ]
+        },
+        {
+          "titulo": "Densidade e vazão",
+          "itens": [
+            "Densidade = massa / volume. Vazão = volume / tempo.",
+            "1 litro = 1 dm cúbico = 1000 cm cúbicos. 1 metro cúbico = 1000 litros.",
+            "Encher uma caixa: divida o volume da caixa pela vazão da torneira."
+          ]
+        },
+        {
+          "titulo": "Regra de três composta",
+          "itens": [
+            "Mais de duas grandezas na mesma questão: compare cada uma com a que você quer descobrir.",
+            "Marque direta ou inversa em cada par antes de montar a conta.",
+            "Exemplo clássico: 5 máquinas produzem 200 peças em 4 horas; quantas peças 8 máquinas fazem em 6 horas?"
+          ]
+        }
+      ],
+      "pegadinhas": [
+        "Unidades diferentes no mesmo cálculo: km com metros, horas com minutos. Converta primeiro.",
+        "Em grandeza inversa, quem erra é quem monta a regra de três igual à direta.",
+        "Velocidade média com trechos de tempos diferentes não é média aritmética das velocidades."
+      ],
+      "lembrete": "Antes de armar a conta, pergunte: se esta grandeza aumenta, a outra aumenta ou diminui? A resposta define direta ou inversa e evita 90% dos erros."
+    },
+    {
+      "id": "funcoes",
+      "titulo": "Funções: afim e quadrática",
+      "chamada": "Reta, parábola e leitura de gráficos",
+      "central": "FUNÇÕES",
+      "ramos": [
+        {
+          "titulo": "Função afim",
+          "itens": [
+            "f(x) = ax + b. O gráfico é uma reta.",
+            "a é a taxa de variação: quanto y muda quando x aumenta 1.",
+            "b é o valor inicial, onde a reta corta o eixo y.",
+            "a > 0 a função cresce; a < 0 a função decresce."
+          ]
+        },
+        {
+          "titulo": "Função quadrática",
+          "itens": [
+            "f(x) = ax ao quadrado + bx + c. O gráfico é uma parábola.",
+            "a > 0 a concavidade é para cima e o vértice é ponto de mínimo.",
+            "a < 0 a concavidade é para baixo e o vértice é ponto de máximo.",
+            "c é onde a parábola corta o eixo y."
+          ]
+        },
+        {
+          "titulo": "Vértice",
+          "itens": [
+            "x do vértice = -b / (2a).",
+            "Para achar o y do vértice, substitua esse x na função.",
+            "É o vértice que responde as perguntas de lucro máximo, altura máxima e custo mínimo."
+          ]
+        },
+        {
+          "titulo": "Raízes",
+          "itens": [
+            "São os valores de x onde f(x) = 0, ou seja, onde o gráfico corta o eixo x.",
+            "Delta = b ao quadrado - 4ac. Delta > 0 dá duas raízes, delta = 0 dá uma, delta < 0 nenhuma raiz real.",
+            "Bhaskara: x = (-b mais ou menos a raiz de delta) / (2a)."
+          ]
+        },
+        {
+          "titulo": "Leitura de gráfico",
+          "itens": [
+            "Identifique primeiro o que está em cada eixo e a unidade.",
+            "Trecho subindo = crescimento; trecho reto horizontal = valor constante.",
+            "A maioria das questões de função no ENEM se resolve lendo o gráfico, sem calcular nada."
+          ]
+        },
+        {
+          "titulo": "Função exponencial",
+          "itens": [
+            "f(x) = valor inicial x (base) elevado a x.",
+            "Crescimento de 5% ao ano por t anos: multiplique por 1,05 elevado a t.",
+            "Aparece em população, bactérias, juros compostos e meia-vida."
+          ]
+        }
+      ],
+      "pegadinhas": [
+        "Confundir o coeficiente a (inclinação) com b (valor inicial) na função afim.",
+        "Achar que o vértice é sempre mínimo: com a negativo ele é máximo.",
+        "Ler o gráfico sem olhar a unidade dos eixos (milhares, milhões, porcentagem)."
+      ],
+      "lembrete": "Pergunta de valor máximo ou mínimo é vértice. Pergunta de quando zera é raiz. Pergunta de quanto muda por unidade é o coeficiente a."
+    },
+    {
+      "id": "geometria",
+      "titulo": "Geometria: áreas e volumes",
+      "chamada": "Piso, tinta, caixa d'água e embalagem",
+      "central": "GEOMETRIA",
+      "ramos": [
+        {
+          "titulo": "Áreas planas",
+          "itens": [
+            "Retângulo: base x altura. Quadrado: lado ao quadrado.",
+            "Triângulo: base x altura / 2.",
+            "Círculo: pi x raio ao quadrado. Use pi = 3 ou 3,14 conforme o enunciado mandar.",
+            "Trapézio: (base maior + base menor) x altura / 2."
+          ]
+        },
+        {
+          "titulo": "Volumes",
+          "itens": [
+            "Prisma e cilindro: área da base x altura.",
+            "Pirâmide e cone: área da base x altura / 3.",
+            "Esfera: (4/3) x pi x raio ao cubo.",
+            "1 metro cúbico = 1000 litros. É a conversão mais cobrada."
+          ]
+        },
+        {
+          "titulo": "Teorema de Pitágoras",
+          "itens": [
+            "Só vale em triângulo retângulo: hipotenusa ao quadrado = soma dos quadrados dos catetos.",
+            "Trios que caem sempre: 3-4-5, 6-8-10, 5-12-13.",
+            "Serve para escadas apoiadas, rampas, diagonais e distâncias."
+          ]
+        },
+        {
+          "titulo": "Semelhança",
+          "itens": [
+            "Figuras semelhantes têm lados proporcionais e ângulos iguais.",
+            "Se a razão entre os lados é k, a razão entre as áreas é k ao quadrado.",
+            "E a razão entre os volumes é k ao cubo. Isso derruba muita gente."
+          ]
+        },
+        {
+          "titulo": "Trigonometria básica",
+          "itens": [
+            "Seno = cateto oposto / hipotenusa. Cosseno = cateto adjacente / hipotenusa. Tangente = oposto / adjacente.",
+            "Mnemônico: SOH-CAH-TOA.",
+            "Valores de 30, 45 e 60 graus costumam vir na própria prova, em tabela."
+          ]
+        },
+        {
+          "titulo": "Unidades de área e volume",
+          "itens": [
+            "1 metro quadrado = 10000 centímetros quadrados (não 100).",
+            "1 metro cúbico = 1000000 centímetros cúbicos.",
+            "1 hectare = 10000 metros quadrados."
+          ]
+        }
+      ],
+      "pegadinhas": [
+        "Converter área dividindo por 100 em vez de 10000: metro quadrado e centímetro quadrado não seguem a mesma regra do comprimento.",
+        "Dobrar o lado de um quadrado quadruplica a área, não dobra.",
+        "Usar Pitágoras em triângulo que não é retângulo."
+      ],
+      "lembrete": "Quase toda questão de geometria do ENEM é de aplicação: quanto de piso, quantos litros, quanta tinta. Descubra a figura, aplique a fórmula, confira a unidade."
+    },
+    {
+      "id": "estatistica",
+      "titulo": "Estatística e gráficos",
+      "chamada": "Média, mediana, moda e leitura de tabela",
+      "central": "ESTATÍSTICA",
+      "ramos": [
+        {
+          "titulo": "Média aritmética",
+          "itens": [
+            "Soma de todos os valores dividida pela quantidade de valores.",
+            "É sensível a valores extremos: um salário muito alto puxa a média do grupo inteiro.",
+            "Média ponderada: multiplique cada valor pelo seu peso, some tudo e divida pela soma dos pesos."
+          ]
+        },
+        {
+          "titulo": "Mediana",
+          "itens": [
+            "Coloque os valores em ordem e pegue o do meio.",
+            "Se a quantidade for par, é a média dos dois centrais.",
+            "Não se deixa levar por extremos — por isso se usa mediana para renda."
+          ]
+        },
+        {
+          "titulo": "Moda",
+          "itens": [
+            "O valor que mais se repete.",
+            "Pode não existir, e pode haver mais de uma.",
+            "É a única medida que serve para dados não numéricos, como cor preferida."
+          ]
+        },
+        {
+          "titulo": "Dispersão",
+          "itens": [
+            "Amplitude = maior valor - menor valor.",
+            "Desvio padrão alto significa dados espalhados; baixo significa dados parecidos entre si.",
+            "Duas turmas podem ter a mesma média e desvios padrão bem diferentes."
+          ]
+        },
+        {
+          "titulo": "Gráficos",
+          "itens": [
+            "Barras comparam categorias. Linhas mostram evolução no tempo. Setores (pizza) mostram partes de um todo.",
+            "Em gráfico de setores, o total é sempre 100% — some as fatias para achar a que falta.",
+            "Olhe sempre se o eixo começa em zero: eixo cortado exagera diferenças."
+          ]
+        },
+        {
+          "titulo": "Tabelas de frequência",
+          "itens": [
+            "Frequência absoluta é a contagem; a relativa é a porcentagem sobre o total.",
+            "Para a média em tabela, multiplique cada valor pela frequência, some e divida pelo total de dados.",
+            "Confira o total antes de responder: enunciado costuma dar pistas nele."
+          ]
+        }
+      ],
+      "pegadinhas": [
+        "Calcular a média somando os valores e dividindo pela quantidade de categorias, e não pelo total de dados.",
+        "Esquecer de ordenar antes de achar a mediana.",
+        "Aceitar a impressão visual de um gráfico com eixo cortado sem olhar os números."
+      ],
+      "lembrete": "Média se desloca com extremo, mediana não. Se a questão fala em renda, salário ou preço de imóvel, desconfie: quase sempre a mediana representa melhor."
+    },
+    {
+      "id": "probabilidade",
+      "titulo": "Probabilidade e contagem",
+      "chamada": "Casos favoráveis, casos possíveis e o princípio multiplicativo",
+      "central": "PROBABILIDADE",
+      "ramos": [
+        {
+          "titulo": "Definição",
+          "itens": [
+            "P = casos favoráveis / casos possíveis.",
+            "O resultado vai sempre de 0 a 1 (ou de 0% a 100%).",
+            "Probabilidade de não acontecer = 1 - probabilidade de acontecer."
+          ]
+        },
+        {
+          "titulo": "Princípio multiplicativo",
+          "itens": [
+            "Se uma escolha tem m opções e outra tem n, juntas dão m x n possibilidades.",
+            "3 camisas e 4 calças formam 12 combinações.",
+            "Placas, senhas e cardápios caem com esse princípio."
+          ]
+        },
+        {
+          "titulo": "E x OU",
+          "itens": [
+            "Eventos independentes ligados por E: multiplique as probabilidades.",
+            "Eventos exclusivos ligados por OU: some as probabilidades.",
+            "Tirar cara E depois cara: 1/2 x 1/2 = 1/4."
+          ]
+        },
+        {
+          "titulo": "Com e sem reposição",
+          "itens": [
+            "Com reposição, o total de casos possíveis não muda entre as retiradas.",
+            "Sem reposição, diminui: de 10 bolas, a segunda retirada tem 9 casos possíveis.",
+            "Leia o enunciado: a palavra devolve muda toda a conta."
+          ]
+        },
+        {
+          "titulo": "Permutação e combinação",
+          "itens": [
+            "Se a ordem importa (pódio, senha), é permutação ou arranjo.",
+            "Se a ordem não importa (comissão, salada de frutas), é combinação.",
+            "Combinação de n elementos tomados p a p: n! / (p! x (n - p)!)."
+          ]
+        },
+        {
+          "titulo": "Probabilidade condicional",
+          "itens": [
+            "É a probabilidade de algo dado que outra coisa já aconteceu.",
+            "Reduz o espaço de casos possíveis apenas ao grupo citado.",
+            "Em tabela de dupla entrada, olhe só a linha ou coluna que a condição indica."
+          ]
+        }
+      ],
+      "pegadinhas": [
+        "Somar quando deveria multiplicar: E multiplica, OU soma.",
+        "Esquecer que sem reposição o denominador muda na segunda retirada.",
+        "Tratar como combinação um caso em que a ordem importa."
+      ],
+      "lembrete": "Antes de calcular, responda duas perguntas: a ordem importa? houve reposição? Elas decidem a fórmula inteira."
+    }
+  ],
+  "questoes": [
+    {
+      "assunto": "Porcentagem",
+      "mapa": "porcentagem",
+      "enunciado": "Uma loja anuncia um desconto de 10% e, no caixa, dá mais 20% de desconto sobre o valor já reduzido. O desconto total sobre o preço original é de:",
+      "alternativas": ["30%", "28%", "25%", "32%", "18%"],
+      "correta": 1,
+      "explicacao": "Descontos sucessivos se multiplicam: 0,90 x 0,80 = 0,72. Pagando 72% do preço, o desconto foi de 28% — e não os 30% da soma ingênua."
+    },
+    {
+      "assunto": "Porcentagem",
+      "mapa": "porcentagem",
+      "enunciado": "O preço de um produto passou de R$ 80,00 para R$ 100,00. Qual foi o aumento percentual?",
+      "alternativas": ["20%", "22%", "25%", "30%", "125%"],
+      "correta": 2,
+      "explicacao": "Variação = (100 - 80) / 80 = 0,25, ou seja, 25%. O erro comum é dividir por 100 (o valor final) e responder 20%."
+    },
+    {
+      "assunto": "Juros",
+      "mapa": "porcentagem",
+      "enunciado": "Um capital de R$ 2.000,00 é aplicado a juros simples de 3% ao mês durante 5 meses. O montante final será de:",
+      "alternativas": ["R$ 2.060,00", "R$ 2.300,00", "R$ 2.318,55", "R$ 2.600,00", "R$ 3.000,00"],
+      "correta": 1,
+      "explicacao": "M = C x (1 + i x t) = 2000 x (1 + 0,03 x 5) = 2000 x 1,15 = 2300. Em juros simples o rendimento é sempre sobre o capital inicial."
+    },
+    {
+      "assunto": "Proporção",
+      "mapa": "proporcao",
+      "enunciado": "Em um mapa de escala 1:50.000, dois pontos estão a 8 cm de distância. Qual é a distância real entre eles?",
+      "alternativas": ["400 m", "4 km", "40 km", "4.000 km", "800 m"],
+      "correta": 1,
+      "explicacao": "8 cm x 50.000 = 400.000 cm. Convertendo: 400.000 cm = 4.000 m = 4 km. O passo que derruba é parar em centímetros."
+    },
+    {
+      "assunto": "Proporção",
+      "mapa": "proporcao",
+      "enunciado": "Se 6 máquinas iguais fazem um serviço em 10 dias, quantos dias levarão 12 máquinas, no mesmo ritmo?",
+      "alternativas": ["20 dias", "12 dias", "10 dias", "5 dias", "3 dias"],
+      "correta": 3,
+      "explicacao": "Máquinas e tempo são grandezas inversamente proporcionais: dobrando as máquinas, o tempo cai pela metade. 10 / 2 = 5 dias."
+    },
+    {
+      "assunto": "Funções",
+      "mapa": "funcoes",
+      "enunciado": "O lucro de uma empresa é dado por L(x) = -2x² + 40x - 50, em que x é a quantidade vendida. A quantidade que dá lucro máximo é:",
+      "alternativas": ["5", "10", "20", "40", "50"],
+      "correta": 1,
+      "explicacao": "Como a é negativo, o vértice é ponto de máximo. x do vértice = -b / (2a) = -40 / (2 x (-2)) = 10 unidades."
+    },
+    {
+      "assunto": "Geometria",
+      "mapa": "geometria",
+      "enunciado": "Uma caixa d'água tem a forma de um bloco retangular com 2 m de comprimento, 1,5 m de largura e 1 m de altura. Sua capacidade, em litros, é de:",
+      "alternativas": ["300 litros", "3.000 litros", "30 litros", "300.000 litros", "3 litros"],
+      "correta": 1,
+      "explicacao": "Volume = 2 x 1,5 x 1 = 3 metros cúbicos. Como 1 metro cúbico equivale a 1.000 litros, a caixa comporta 3.000 litros."
+    },
+    {
+      "assunto": "Geometria",
+      "mapa": "geometria",
+      "enunciado": "Se o lado de um quadrado é dobrado, o que acontece com a sua área?",
+      "alternativas": ["Dobra", "Triplica", "Quadruplica", "Não muda", "Aumenta 50%"],
+      "correta": 2,
+      "explicacao": "A área depende do lado ao quadrado. Se o lado é multiplicado por 2, a área é multiplicada por 2² = 4. É a regra de semelhança: razão k nos lados, k² nas áreas."
+    },
+    {
+      "assunto": "Estatística",
+      "mapa": "estatistica",
+      "enunciado": "Em uma equipe, cinco pessoas ganham R$ 2.000,00 e uma ganha R$ 20.000,00. Sobre média e mediana dos salários, é correto afirmar que:",
+      "alternativas": [
+        "a média é menor que a mediana",
+        "a média é igual à mediana",
+        "a média é maior que a mediana, por causa do salário extremo",
+        "não é possível calcular a mediana",
+        "a moda é R$ 20.000,00"
+      ],
+      "correta": 2,
+      "explicacao": "A média é 5.000 e a mediana é 2.000. O salário de 20 mil puxa a média para cima, mas não afeta o valor central — por isso a mediana representa melhor esse grupo."
+    },
+    {
+      "assunto": "Probabilidade",
+      "mapa": "probabilidade",
+      "enunciado": "Em uma urna há 4 bolas azuis e 6 vermelhas. Retirando duas bolas, uma após a outra e SEM reposição, a probabilidade de as duas serem azuis é:",
+      "alternativas": ["4/25", "2/15", "1/5", "4/45", "8/45"],
+      "correta": 1,
+      "explicacao": "Primeira bola azul: 4/10. Sem reposição, sobram 3 azuis em 9 bolas: 3/9. Multiplicando: 4/10 x 3/9 = 12/90 = 2/15."
+    }
+  ]
+}

@@ -54,6 +54,15 @@ is_dir($dir) && is_writable($dir)
     : $erros[] = 'a pasta ' . $dir . ' não existe ou não tem permissão de escrita';
 
 /* ---------- credenciais ---------- */
+
+// De onde elas vêm: herdadas de outra página deste servidor ou escritas aqui.
+$fonte = (string) @file_get_contents($caminho);
+if (preg_match('/\$configQueJaFunciona\s*=\s*[\x27"]([^\x27"]+)[\x27"]/', $fonte, $m) && trim($m[1]) !== '') {
+    is_file($m[1])
+        ? $ok[] = 'credenciais herdadas de ' . $m[1]
+        : $erros[] = 'config herdado não encontrado: ' . $m[1] . ' — confira o caminho em $configQueJaFunciona';
+}
+
 foreach (['client_id', 'client_secret'] as $campo) {
     valorDeExemplo((string) ($config[$campo] ?? ''))
         ? $erros[] = $campo . ' ainda está com o valor de exemplo'
@@ -100,7 +109,7 @@ foreach ($planos as $id => $plano) {
         $erros[] = "plano '$id' está sem valor";
     }
     if (empty($plano['product_id'])) {
-        $avisos[] = "plano '$id' está sem product_id — a venda não fica vinculada ao produto nos relatórios da ZuckPay";
+        $avisos[] = "plano '$id' está sem product_id — se a sua conta exigir produto cadastrado, a cobrança é recusada";
     }
 }
 

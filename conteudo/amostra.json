@@ -1,0 +1,100 @@
+{
+  "id": "amostra",
+  "nome": "Amostra grátis",
+  "cor": "#7C3AED",
+  "chamada": "Um mapa de exemplo para você ver como o app funciona por dentro.",
+  "mapas": [
+    {
+      "id": "porcentagem",
+      "titulo": "Porcentagem e juros",
+      "chamada": "O assunto que mais cai na prova inteira",
+      "central": "PORCENTAGEM",
+      "ramos": [
+        {
+          "titulo": "Ideia básica",
+          "itens": [
+            "x% de um valor = (x / 100) x valor.",
+            "20% de 350 = 0,20 x 350 = 70.",
+            "Transforme a porcentagem em número decimal antes de calcular: 7% vira 0,07 e 130% vira 1,3."
+          ]
+        },
+        {
+          "titulo": "Fator de aumento",
+          "itens": [
+            "Aumentar 15% = multiplicar por 1,15. Aumentar 8% = multiplicar por 1,08.",
+            "Regra: 1 + (taxa / 100).",
+            "Preço de 240 com aumento de 15%: 240 x 1,15 = 276."
+          ]
+        },
+        {
+          "titulo": "Fator de desconto",
+          "itens": [
+            "Dar 30% de desconto = multiplicar por 0,70 (você paga 70%).",
+            "Regra: 1 - (taxa / 100).",
+            "Dois descontos seguidos de 10% e 20% dão 0,9 x 0,8 = 0,72, ou seja, 28% de desconto — e não 30%."
+          ]
+        },
+        {
+          "titulo": "Variação percentual",
+          "itens": [
+            "Variação = (valor final - valor inicial) / valor inicial x 100.",
+            "De 80 para 100: (100 - 80) / 80 = 0,25, ou seja, aumento de 25%.",
+            "De 100 para 80: (80 - 100) / 100 = -0,20, ou seja, queda de 20%. Subir e descer a mesma quantia não dá a mesma porcentagem."
+          ]
+        },
+        {
+          "titulo": "Juros simples",
+          "itens": [
+            "M = C x (1 + i x t). O juro incide sempre sobre o valor inicial.",
+            "C é o capital, i a taxa em decimal e t o tempo — na mesma unidade da taxa.",
+            "1000 reais a 2% ao mês por 5 meses: 1000 x (1 + 0,02 x 5) = 1100."
+          ]
+        },
+        {
+          "titulo": "Juros compostos",
+          "itens": [
+            "M = C x (1 + i) elevado a t. O juro incide sobre o montante anterior.",
+            "1000 reais a 2% ao mês por 3 meses: 1000 x 1,02 x 1,02 x 1,02 = 1061,21.",
+            "A partir do segundo período, composto é sempre maior que simples."
+          ]
+        }
+      ],
+      "pegadinhas": [
+        "Descontos sucessivos não se somam: 10% + 20% não é 30%.",
+        "Taxa e tempo precisam estar na mesma unidade. Taxa ao mês com tempo em anos? Converta antes.",
+        "Aumento de 100% é dobrar; aumento para 100% do valor é não mudar nada. Leia se o enunciado diz 'em' ou 'para'."
+      ],
+      "lembrete": "Aumentar é multiplicar por 1 + taxa. Diminuir é multiplicar por 1 - taxa. Com isso você resolve a maioria das questões de porcentagem sem armar conta."
+    }
+  ],
+  "questoes": [
+    {
+      "assunto": "Porcentagem",
+      "mapa": "porcentagem",
+      "enunciado": "Uma loja anuncia um desconto de 10% e, no caixa, dá mais 20% de desconto sobre o valor já reduzido. O desconto total sobre o preço original é de:",
+      "alternativas": [
+        "30%",
+        "28%",
+        "25%",
+        "32%",
+        "18%"
+      ],
+      "correta": 1,
+      "explicacao": "Descontos sucessivos se multiplicam: 0,90 x 0,80 = 0,72. Pagando 72% do preço, o desconto foi de 28% — e não os 30% da soma ingênua."
+    },
+    {
+      "assunto": "Porcentagem",
+      "mapa": "porcentagem",
+      "enunciado": "O preço de um produto passou de R$ 80,00 para R$ 100,00. Qual foi o aumento percentual?",
+      "alternativas": [
+        "20%",
+        "22%",
+        "25%",
+        "30%",
+        "125%"
+      ],
+      "correta": 2,
+      "explicacao": "Variação = (100 - 80) / 80 = 0,25, ou seja, 25%. O erro comum é dividir por 100 (o valor final) e responder 20%."
+    }
+  ]
+}

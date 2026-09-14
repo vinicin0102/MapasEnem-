@@ -36,16 +36,38 @@ completo, que a partir daí sai mais barato.
 Matérias disponíveis: Matemática, Física, Química, Biologia, História,
 Geografia, Filosofia e Sociologia, Português e Literatura, Inglês e Espanhol.
 
+## Já tem outra página ZuckPay funcionando neste servidor?
+
+Então não copie credencial nenhuma. Abra o `api/config.php` e preencha só a
+primeira linha com o caminho do config que já funciona:
+
+```php
+$configQueJaFunciona = '/home/usuario/public_html/api/config.php';
+```
+
+Daí este projeto herda o que já está comprovado naquela conta: `client_id`,
+`client_secret`, `api_base` (inclusive o host certo, com ou sem `www`) e
+`webhook_secret`. Mudou a credencial lá, muda aqui junto — e o segredo continua
+existindo em um arquivo só.
+
+O que **não** se herda, porque é desta página: `webhook_url`,
+`allowed_origins` e os links de entrega.
+
+Confira com `php tools/checar-config.php`: ele diz de qual arquivo as
+credenciais vieram.
+
 ## Colocar para vender (na ordem)
 
 1. **Suba os arquivos** no seu domínio, com `index.html` na raiz e a pasta
    `api/` ao lado dela.
 2. **Crie o config**: `cp api/config.example.php api/config.php`.
-3. **Credenciais**: `client_id` e `client_secret` da tela *Integrações > API
-   keys* da ZuckPay (ou as variáveis `ZUCKPAY_CLIENT_ID` /
-   `ZUCKPAY_CLIENT_SECRET`).
-4. **Produtos**: cadastre o produto no painel da ZuckPay e ponha o id em
-   `product_id`, nos dois planos.
+3. **Credenciais**: herde de outra página (seção acima) ou preencha
+   `client_id` e `client_secret` da tela *Integrações > API keys* da ZuckPay
+   (ou as variáveis `ZUCKPAY_CLIENT_ID` / `ZUCKPAY_CLIENT_SECRET`).
+4. **Produtos**: os dois planos já vêm com o `product_id` 593187, o mesmo
+   produto usado na outra página — se a sua conta exige produto cadastrado, ele
+   já resolve. Para separar as vendas nos relatórios, cadastre um produto só do
+   ENEM e troque o id.
 5. **Webhook**: aponte `webhook_url` para
    `https://SEU-DOMINIO/api/webhook.php` e cadastre essa mesma URL em
    *Integrações > Webhooks*. Gere o **Webhook Secret** e cole em
@@ -176,6 +198,11 @@ O segredo é lido do `config.php`; nunca passe por argumento, porque a linha de
 comando fica visível para outros processos e no histórico do shell.
 
 ## Se o PIX não gerar
+
+**Antes de tudo**, a página agora diz o motivo na própria tela: se der HTTP 404
+em `/api/pix.php`, a pasta `api/` não está na raiz do site; se der 500, o
+`config.php` não existe ou tem erro; se vier um código de erro, o problema é a
+resposta da ZuckPay. O console do navegador (F12) mostra a resposta inteira.
 
 1. Defina um `debug_token` no `config.php` e abra:
    `https://seu-dominio.com.br/api/diagnostico.php?token=SEU_TOKEN`

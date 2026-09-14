@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#1E1B4B">
+    <title>Mapas ENEM</title>
+    <meta name="description" content="Mini app com os mapas mentais do ENEM: o que mais cai, em 1 imagem por assunto.">
+
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="icone.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="icone-180.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Mapas ENEM">
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+
+<header class="topo" id="topo">
+    <button type="button" class="voltar" id="btn-voltar" hidden aria-label="Voltar">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <div class="titulos">
+        <p class="marca">MAPAS ENEM</p>
+        <h1 id="titulo">Seus materiais</h1>
+    </div>
+    <span class="selo" id="selo" hidden></span>
+</header>
+
+<main id="conteudo" class="conteudo">
+    <div class="carregando" id="carregando">
+        <div class="girando" aria-hidden="true"></div>
+        <p>Abrindo seus mapas…</p>
+    </div>
+</main>
+
+<!-- Painel que abre ao tocar num ramo do mapa -->
+<div class="lamina" id="lamina" hidden>
+    <div class="lamina-fundo" data-fechar></div>
+    <div class="lamina-caixa" role="dialog" aria-modal="true" aria-labelledby="lamina-titulo">
+        <div class="lamina-alca" data-fechar></div>
+        <h2 id="lamina-titulo"></h2>
+        <ul id="lamina-itens"></ul>
+        <button type="button" class="botao secundario" data-fechar>Fechar</button>
+    </div>
+</div>
+
+<script src="mapa.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
