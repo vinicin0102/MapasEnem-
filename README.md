@@ -8,12 +8,15 @@ index.html               página de vendas + modal de checkout
 img/                     mockups do app e capas das matérias (SVG)
 api/pix.php              cria a cobrança PIX (soma plano + order bumps)
 api/status.php           consulta o status do pagamento
-api/webhook.php          recebe a notificação da ZuckPay e libera a entrega
+api/webhook.php          recebe a notificação da ZuckPay e dispara a entrega
+api/entrega.php          monta e envia o e-mail com os acessos comprados
 api/diagnostico.php      checagem da integração (protegido por token)
-api/_bootstrap.php       validação, CORS e chamada autenticada à API
+api/_bootstrap.php       validação, CORS, limite por IP e chamada à API
 api/config.example.php   modelo de configuração
-tools/testar-webhook.php testa a validação de assinatura do webhook (CLI)
-storage/                 pedidos e log de pagamentos (não versionado)
+tools/checar-config.php      confere o config.php antes de abrir as vendas (CLI)
+tools/testar-webhook.php     testa a validação de assinatura do webhook (CLI)
+tools/reenviar-entrega.php   reenvia o e-mail de acesso de uma compra (CLI)
+storage/                 pedidos, entregas e log de pagamentos (não versionado)
 ```
 
 ## A oferta
@@ -32,6 +35,34 @@ completo, que a partir daí sai mais barato.
 
 Matérias disponíveis: Matemática, Física, Química, Biologia, História,
 Geografia, Filosofia e Sociologia, Português e Literatura, Inglês e Espanhol.
+
+## Colocar para vender (na ordem)
+
+1. **Suba os arquivos** no seu domínio, com `index.html` na raiz e a pasta
+   `api/` ao lado dela.
+2. **Crie o config**: `cp api/config.example.php api/config.php`.
+3. **Credenciais**: `client_id` e `client_secret` da tela *Integrações > API
+   keys* da ZuckPay (ou as variáveis `ZUCKPAY_CLIENT_ID` /
+   `ZUCKPAY_CLIENT_SECRET`).
+4. **Produtos**: cadastre o produto no painel da ZuckPay e ponha o id em
+   `product_id`, nos dois planos.
+5. **Webhook**: aponte `webhook_url` para
+   `https://SEU-DOMINIO/api/webhook.php` e cadastre essa mesma URL em
+   *Integrações > Webhooks*. Gere o **Webhook Secret** e cole em
+   `webhook_secret`.
+6. **CORS**: troque `allowed_origins` pelo seu domínio (com e sem `www`).
+7. **Entrega**: preencha `entrega.remetente_email` (um e-mail do seu domínio) e
+   **os links de cada item** em `entrega.links`. Sem link, o comprador paga e
+   não recebe.
+8. **Confira**: `php tools/checar-config.php` — ele reprova o que ainda estiver
+   faltando.
+9. **Teste a API de verdade**: defina um `debug_token` e abra
+   `/api/diagnostico.php?token=SEU_TOKEN` (ele cria uma cobrança de R$ 1,00).
+   Depois, `php tools/testar-webhook.php`.
+10. **Compre você mesmo** uma vez, de celular: pague o PIX de R$ 9,90, veja a
+    tela virar "pagamento confirmado" e o e-mail chegar.
+11. **Feche o diagnóstico**: apague `api/diagnostico.php` (ou esvazie
+    `debug_token`) e deixe `debug => false`.
 
 ## Configuração
 
@@ -82,9 +113,46 @@ $pedido['materia']  // id da matéria escolhida no plano de 1 matéria
 $pedido['bumps']    // ids dos bumps pagos (outras matérias e/ou 'redacao900')
 ```
 
-O ponto exato onde entra o envio do e-mail / liberação do acesso está marcado
-com um `TODO` em `api/webhook.php`, dentro do bloco que roda uma única vez por
-transação.
+Com o pagamento confirmado, `api/entrega.php` monta o e-mail com **apenas os
+itens pagos** e manda para o e-mail do checkout. Os links vêm de
+`entrega.links` no `config.php`.
+
+Três detalhes que evitam comprador sem acesso:
+
+- **O envio sai uma vez só.** O marcador de entrega é criado antes do envio,
+  então dois postbacks simultâneos não viram dois e-mails.
+- **Falha é retentada.** Se o envio falhar, o marcador é apagado e a próxima
+  notificação da ZuckPay tenta de novo — em vez de o comprador ficar sem nada.
+- **Link faltando não some.** O item pago aparece no e-mail como "enviamos em
+  instantes" e a pendência fica em `storage/entregas.log`. Se *nenhum* link
+  estiver configurado, o e-mail não é enviado e fica tudo registrado para
+  reenvio.
+
+Para reenviar (comprador perdeu o e-mail, envio falhou, ou você só preencheu os
+links depois da venda):
+
+```bash
+php tools/reenviar-entrega.php comprador@email.com
+php tools/reenviar-entrega.php MOCK123456          # por transactionId
+php tools/reenviar-entrega.php --pendentes         # tudo que ainda não saiu
+```
+
+Ele só reenvia compras com pagamento confirmado — um PIX gerado e não pago é
+pulado.
+
+O e-mail sai pelo `mail()` do PHP. Se a sua hospedagem não entregar bem
+(mensagem caindo em spam), o caminho é apontar o `sendmail_path` do PHP para um
+SMTP autenticado do seu domínio — o código não muda.
+
+### storage/ não pode ser público
+
+A pasta guarda nome e e-mail de quem comprou, em arquivos de nome previsível
+(`pagamentos.log`, `entregas.log`). O código já cria um `.htaccess` negando
+tudo, o que resolve no Apache. **Em nginx, bloqueie no server block:**
+
+```nginx
+location ^~ /storage/ { deny all; }
+```
 
 ## Conferir o webhook
 
@@ -167,6 +235,14 @@ Estas escolhas são deliberadas — mudá-las abre brecha real:
 - **Cobranças não duplicam.** Cada abertura do checkout gera um `pedido`, usado
   como `external_id_client`. Clicar duas vezes devolve a mesma cobrança em vez
   de criar outra.
+- **Há limite de cobranças por IP.** `limite_pix` no `config.php` (30 por 10
+  minutos, por padrão) impede que um script gere cobranças em massa e estoure o
+  rate limit da ZuckPay para quem está comprando de verdade. O limite é
+  propositalmente folgado: no 4G brasileiro (CGNAT) muita gente sai pelo mesmo
+  IP, e um limite apertado barraria comprador real. Atrás de Cloudflare, ligue
+  `atras_de_proxy` para o limite enxergar o IP verdadeiro.
+- **A entrega só manda o que foi pago.** A lista sai da composição gravada no
+  servidor, não de nada que o navegador tenha enviado.
 
 ## Rate limit
 
@@ -183,8 +259,8 @@ A ZuckPay responde **429 após 5 tentativas em 30 minutos**. Por isso:
 
 1. **`product_id`** — os dois planos estão com `product_id => 0` no
    `config.example.php`; preencha com o id do produto cadastrado na ZuckPay.
-2. **Entrega do produto** — `api/webhook.php` tem um `TODO` no ponto onde entra
-   o envio do e-mail com o acesso ao mini app.
+2. **Links de entrega** — preencha `entrega.links` no `config.php` com a URL de
+   cada matéria, do plano completo e do guia de redação.
 3. **Imagens** — as artes em `img/` são mockups feitos em SVG (telas do app,
    capas das matérias, questionário e guia de redação). Troque por prints reais
    do app quando ele existir.
@@ -192,7 +268,5 @@ A ZuckPay responde **429 após 5 tentativas em 30 minutos**. Por isso:
    `<!-- TROCAR -->`; substitua por comentários reais antes de anunciar.
 5. **Pixels** — o `index.html` carrega o Meta Pixel com o id de outro produto
    (`<!-- TROCAR -->`); troque se este produto tiver pixel próprio.
-6. **Rate limiting** — não há limite de requisições em `api/pix.php`. Vale pôr
-   um limite por IP para evitar geração de cobranças em massa.
-7. **Desativar o diagnóstico** — depois de resolver, apague `api/diagnostico.php`
+6. **Desativar o diagnóstico** — depois de resolver, apague `api/diagnostico.php`
    ou deixe `debug_token` vazio (assim ele responde 404).

@@ -99,6 +99,69 @@ return [
         'redacao900' => ['nome' => '10 Segredos da Redação 900+',     'valor' => 15.99, 'tipo' => 'extra'],
     ],
 
+    /**
+     * Entrega automática.
+     *
+     * Quando o pagamento é confirmado, api/webhook.php manda um e-mail com os
+     * acessos do que foi comprado. Cada id abaixo é o mesmo usado nos planos,
+     * nas matérias e nos bumps — preencha com o link do material (área de
+     * membros, Google Drive, Notion, o mini app publicado...).
+     *
+     * Item pago sem link não some: o comprador recebe o e-mail avisando que
+     * aquele acesso chega em seguida, e a pendência fica em
+     * storage/entregas.log para você mandar na mão. Se NENHUM link estiver
+     * preenchido, o e-mail não é enviado e a entrega fica registrada como
+     * pendente — a próxima notificação da ZuckPay tenta de novo.
+     */
+    'entrega' => [
+        'remetente_nome'  => 'Mapas ENEM',
+        'remetente_email' => 'contato@SEU-DOMINIO.com.br', // precisa ser do seu domínio
+        'responder_para'  => 'contato@SEU-DOMINIO.com.br',
+        'assunto'         => 'Seu acesso ao Mapas ENEM chegou 🎉',
+        'suporte'         => '', // opcional: link do WhatsApp/e-mail que aparece no rodapé
+
+        'links' => [
+            // Plano completo: um acesso com todas as matérias + questionário
+            'completo'   => '',
+
+            // Mini app de cada matéria (plano de 1 matéria e order bumps)
+            'matematica' => '',
+            'fisica'     => '',
+            'quimica'    => '',
+            'biologia'   => '',
+            'historia'   => '',
+            'geografia'  => '',
+            'filosofia'  => '',
+            'portugues'  => '',
+            'linguas'    => '',
+
+            // Order bump da redação
+            'redacao900' => '',
+        ],
+    ],
+
+    /**
+     * Limite de cobranças por IP (janela deslizante).
+     *
+     * Evita que um script gere cobranças em massa e estoure o rate limit da
+     * ZuckPay para quem está comprando de verdade.
+     *
+     * Não aperte demais: no 4G brasileiro (CGNAT) e em escolas, muita gente
+     * sai pelo MESMO IP — um limite baixo barraria compradores reais. 30 por
+     * 10 minutos já mata script e sobra folga para o tráfego normal. Use
+     * tentativas => 0 para desligar.
+     */
+    'limite_pix' => [
+        'tentativas' => 30,
+        'janela'     => 600, // segundos
+    ],
+
+    /**
+     * Ligue se o site estiver atrás de Cloudflare ou outro proxy — sem isso
+     * o limite acima enxerga o IP do proxy e conta todo mundo junto.
+     */
+    'atras_de_proxy' => false,
+
     // URL pública que a ZuckPay chama quando o pagamento muda de status.
     // Cadastre-a também em Integrações > Webhooks no painel.
     'webhook_url' => 'https://SEU-DOMINIO.com.br/api/webhook.php',

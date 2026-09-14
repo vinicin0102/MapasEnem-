@@ -15,6 +15,7 @@ declare(strict_types=1);
  */
 
 require __DIR__ . '/_bootstrap.php';
+require __DIR__ . '/entrega.php';
 
 $config = carregarConfig();
 
@@ -96,13 +97,13 @@ if (strtoupper((string) $resposta['status']) !== 'PAID') {
  */
 $jaProcessado = transacaoJaRegistrada($config, $transactionId);
 
+$externalId = (string) ($transacao['external_id_client'] ?? ($corpo['external_id_client'] ?? ''));
+
+// O que foi comprado (plano, matéria e order bumps) foi gravado por
+// api/pix.php na criação da cobrança — é o que diz o que entregar.
+$pedido = $externalId !== '' ? lerPedido($config, $externalId) : null;
+
 if (!$jaProcessado) {
-    $externalId = (string) ($transacao['external_id_client'] ?? ($corpo['external_id_client'] ?? ''));
-
-    // O que foi comprado (plano, matéria e order bumps) foi gravado por
-    // api/pix.php na criação da cobrança — é o que diz o que entregar.
-    $pedido = $externalId !== '' ? lerPedido($config, $externalId) : null;
-
     registrarPagamento($config, [
         'transactionId'      => $transactionId,
         'evento'             => $evento,
@@ -120,17 +121,22 @@ if (!$jaProcessado) {
         'registrado_em'      => date('c'),
     ]);
 
-    /*
-     * TODO — entrega do produto.
-     * Aqui entra o envio do e-mail com o link dos PDFs / liberação da área de
-     * membros. Este bloco roda uma única vez por transactionId.
-     *
-     * Para o Mapas ENEM, $pedido traz o que liberar:
-     *   $pedido['plano']   'materia' ou 'completo'
-     *   $pedido['materia'] id da matéria escolhida no plano de 1 matéria
-     *   $pedido['bumps']   ids dos order bumps pagos (outras matérias e/ou
-     *                      'redacao900')
-     */
 }
 
-responder(200, ['ok' => true, 'duplicado' => $jaProcessado]);
+/**
+ * Entrega: manda o e-mail com os acessos do que foi comprado.
+ *
+ * Fica FORA do bloco acima de propósito. O marcador de entrega é próprio
+ * (api/entrega.php), então um envio que falhou é retentado na próxima
+ * notificação em vez de o comprador ficar sem nada — e um envio que deu certo
+ * nunca sai duas vezes.
+ */
+$entrega = entregarPedido(
+    $config,
+    $transactionId,
+    $pedido,
+    (string) ($pedido['email'] ?? $transacao['email'] ?? ($resposta['email'] ?? '')),
+    (string) ($pedido['nome'] ?? $transacao['nome'] ?? '')
+);
+
+responder(200, ['ok' => true, 'duplicado' => $jaProcessado, 'entrega' => $entrega['status']]);

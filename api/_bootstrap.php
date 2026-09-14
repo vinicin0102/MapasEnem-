@@ -173,13 +173,40 @@ function assinaturaWebhookValida(string $header, string $corpoRaw, string $segre
     return [true, ''];
 }
 
-/** Diretório de estado (cache e registro de vendas). */
+/**
+ * Diretório de estado (cache, pedidos e registro de vendas).
+ *
+ * A pasta fica dentro do site, e guarda e-mail e nome de quem comprou — com
+ * nomes previsíveis como pagamentos.log e entregas.log. Por isso, ao criá-la,
+ * já entram um .htaccess negando tudo (Apache, o caso da maioria das
+ * hospedagens) e um index.html vazio contra listagem de diretório.
+ *
+ * Em nginx não existe .htaccess: bloqueie no server block, por exemplo
+ *   location ^~ /storage/ { deny all; }
+ */
 function diretorioEstado(array $config): string
 {
     $dir = dirname((string) ($config['log_path'] ?? __DIR__ . '/../storage/pagamentos.log'));
+
     if (!is_dir($dir)) {
         @mkdir($dir, 0770, true);
     }
+
+    $htaccess = $dir . '/.htaccess';
+    if (!is_file($htaccess)) {
+        // Apache 2.4 usa Require; o bloco legado cobre 2.2.
+        @file_put_contents(
+            $htaccess,
+            "<IfModule mod_authz_core.c>\n    Require all denied\n</IfModule>\n"
+            . "<IfModule !mod_authz_core.c>\n    Order allow,deny\n    Deny from all\n</IfModule>\n"
+        );
+    }
+
+    $indice = $dir . '/index.html';
+    if (!is_file($indice)) {
+        @file_put_contents($indice, '');
+    }
+
     return $dir;
 }
 
@@ -231,6 +258,70 @@ function transacaoJaRegistrada(array $config, string $transactionId): bool
     fwrite($handle, date('c'));
     fclose($handle);
     return false;
+}
+
+/**
+ * Limite de cobranças por IP.
+ *
+ * Sem isso, um script conseguiria disparar centenas de cobranças na conta —
+ * cada uma é uma chamada à ZuckPay, que tem rate limit próprio (429) e passa a
+ * recusar as cobranças de quem está comprando de verdade.
+ *
+ * Guarda um contador por IP numa janela deslizante simples.
+ *
+ * @return bool true quando o IP estourou o limite
+ */
+function limiteDeTentativasEstourado(array $config, string $ip): bool
+{
+    $tentativas = (int) ($config['limite_pix']['tentativas'] ?? 30);
+    $janela     = (int) ($config['limite_pix']['janela'] ?? 600);
+
+    if ($tentativas <= 0 || $janela <= 0 || $ip === '') {
+        return false; // limite desligado no config
+    }
+
+    $arquivo = diretorioEstado($config) . '/ip-' . sha1($ip) . '.json';
+    $agora   = time();
+
+    $registros = [];
+    if (is_file($arquivo)) {
+        $lido = json_decode((string) @file_get_contents($arquivo), true);
+        $registros = is_array($lido) ? $lido : [];
+    }
+
+    // Descarta o que já saiu da janela.
+    $registros = array_values(array_filter(
+        $registros,
+        static fn ($momento): bool => is_int($momento) && ($agora - $momento) < $janela
+    ));
+
+    if (count($registros) >= $tentativas) {
+        return true;
+    }
+
+    $registros[] = $agora;
+    @file_put_contents($arquivo, json_encode($registros), LOCK_EX);
+    return false;
+}
+
+/** IP do visitante, considerando proxy/CDN quando o config autoriza. */
+function ipDoVisitante(array $config): string
+{
+    if (!empty($config['atras_de_proxy'])) {
+        // Cloudflare e afins: o IP real vem no header, o REMOTE_ADDR é do proxy.
+        foreach (['HTTP_CF_CONNECTING_IP', 'HTTP_X_REAL_IP'] as $header) {
+            $valor = trim((string) ($_SERVER[$header] ?? ''));
+            if (filter_var($valor, FILTER_VALIDATE_IP)) {
+                return $valor;
+            }
+        }
+        $encaminhado = trim(explode(',', (string) ($_SERVER['HTTP_X_FORWARDED_FOR'] ?? ''))[0]);
+        if (filter_var($encaminhado, FILTER_VALIDATE_IP)) {
+            return $encaminhado;
+        }
+    }
+
+    return (string) ($_SERVER['REMOTE_ADDR'] ?? '');
 }
 
 /**

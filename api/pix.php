@@ -17,6 +17,12 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
     responder(405, ['erro' => 'Método não permitido.']);
 }
 
+// Freio contra geração de cobranças em massa a partir de um mesmo IP.
+if (limiteDeTentativasEstourado($config, ipDoVisitante($config))) {
+    registrarErro('pix', 'limite de tentativas por IP atingido');
+    responder(429, ['erro' => 'Muitas tentativas em pouco tempo. Aguarde alguns minutos e tente de novo.']);
+}
+
 /**
  * Os planos (e principalmente o preço) vêm do config.php, no servidor.
  * O valor enviado pelo navegador é ignorado de propósito: se ele fosse
@@ -208,6 +214,7 @@ registrarPedido($config, $externalId, [
     'bumps'         => array_keys($bumps),
     'itens'         => $itens,
     'valor'         => $valorTotal,
+    'nome'          => $nome,
     'email'         => $email,
     'criado_em'     => date('c'),
 ]);
