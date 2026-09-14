@@ -1481,12 +1481,29 @@
                     })
                 });
 
-                const dados = await resposta.json().catch(() => ({}));
+                // Resposta que não é JSON quase sempre é erro de caminho: a
+                // pasta api/ não está onde a página procura, e o servidor
+                // devolveu a página de 404 em HTML.
+                const bruto = await resposta.text();
+                let dados = {};
+                try { dados = JSON.parse(bruto); } catch (_) {
+                    console.error('[checkout] resposta não-JSON de ' + API + '/pix.php',
+                                  { http: resposta.status, corpo: bruto.slice(0, 400) });
+                    mostrarErros(null, resposta.status === 404
+                        ? `O endereço ${API}/pix.php não existe neste servidor (HTTP 404). `
+                          + 'A pasta api/ precisa ficar na raiz do site, ao lado do index.html.'
+                        : `O servidor respondeu HTTP ${resposta.status} sem JSON em ${API}/pix.php. `
+                          + 'Veja o log de erros do PHP na hospedagem.');
+                    return;
+                }
 
                 if (!resposta.ok) {
                     if (dados.debug) console.error('[zuckpay] detalhe do erro:', dados.debug);
+                    console.error('[checkout] falha ao gerar PIX', { http: resposta.status, resposta: dados });
+
                     const msg = (dados.erro || 'Não foi possível gerar o PIX.')
-                              + (dados.ref ? ` (código ${dados.ref})` : '');
+                              + (dados.ref ? ` (código ${dados.ref})` : '')
+                              + ` [HTTP ${resposta.status}]`;
                     mostrarErros(dados.campos, dados.campos ? null : msg);
                     return;
                 }

@@ -42,6 +42,17 @@ $checagens = [];
 $checagens['php'] = PHP_VERSION;
 $checagens['curl'] = extension_loaded('curl') ? 'ok' : 'FALTANDO — instale a extensão php-curl';
 $checagens['openssl'] = extension_loaded('openssl') ? 'ok' : 'FALTANDO';
+$checagens['mbstring'] = extension_loaded('mbstring') ? 'ok' : 'FALTANDO — a criação da cobrança usa mb_substr';
+
+$pastaEstado = diretorioEstado($config);
+$checagens['pasta_storage'] = is_dir($pastaEstado) && is_writable($pastaEstado)
+    ? 'ok (' . $pastaEstado . ')'
+    : 'SEM PERMISSAO DE ESCRITA em ' . $pastaEstado . ' — a entrega não consegue registrar o pedido';
+
+// Onde este arquivo está de verdade, para conferir se a página acha o /api.
+$checagens['este_endpoint'] = ($_SERVER['REQUEST_SCHEME'] ?? 'https') . '://'
+    . ($_SERVER['HTTP_HOST'] ?? '') . ($_SERVER['SCRIPT_NAME'] ?? '');
+$checagens['a_pagina_chama'] = 'A constante API do index.html precisa apontar para a pasta acima, sem o /diagnostico.php';
 
 // 2. Configuração
 $checagens['client_id']     = mascarar((string) ($config['client_id'] ?? ''));
@@ -75,6 +86,7 @@ foreach (($config['planos'] ?? []) as $id => $plano) {
 
 // 4. Cobrança de teste — R$ 1,00 com CPF de teste válido
 $planoTeste = array_key_first($config['planos'] ?? []);
+$checagens['url_chamada'] = rtrim((string) $config['api_base'], '/') . '/qrcode';
 $payload = [
     'nome'     => 'Teste Diagnostico',
     'cpf'      => '52998224725',
@@ -117,6 +129,13 @@ if ($redirect !== '') {
     $teste['tem_qrcode'] = !empty($resposta['qrcode']) ? 'sim' : 'NAO (a API não devolveu o código)';
 } else {
     $teste['resultado'] = 'A API respondeu, mas sem transactionId. Veja o corpo abaixo.';
+}
+
+// Conta que exige produto cadastrado recusa a cobrança sem product_id.
+if ($status !== 200 && empty($config['planos'][$planoTeste]['product_id'])) {
+    $teste['suspeita'] = 'Os planos estão sem product_id no config.php. Se a sua conta exige '
+        . 'produto cadastrado, a cobrança é recusada. Cadastre o produto no painel da ZuckPay '
+        . 'e preencha o product_id dos dois planos.';
 }
 
 $teste['resposta_da_api'] = $resposta;
