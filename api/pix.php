@@ -139,7 +139,13 @@ if (strlen($pedido) < 8 || strlen($pedido) > 60) {
     $pedido = bin2hex(random_bytes(12));
 }
 
-$externalId = ((string) ($plano['prefixo'] ?? 'AC')) . '-' . $planoId . '-' . $pedido;
+$externalId = montarExternalId(
+    (string) ($plano['prefixo'] ?? 'AC'),
+    $planoId,
+    $materiaId,
+    array_keys($bumps),
+    $pedido
+);
 
 $payload = [
     'nome'               => $nome,

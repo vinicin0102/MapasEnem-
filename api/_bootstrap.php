@@ -6,13 +6,26 @@ declare(strict_types=1);
  * Este arquivo não responde nada sozinho.
  */
 
+/**
+ * Carrega a configuração.
+ *
+ * Em hospedagem tradicional, o arquivo é o api/config.php (fora do git, com as
+ * credenciais). Em plataforma serverless (Vercel e afins) o disco é somente
+ * leitura e não existe config.php: aí vale o config.example.php, que lê as
+ * credenciais das variáveis de ambiente do projeto.
+ */
 function carregarConfig(): array
 {
-    $caminho = __DIR__ . '/config.php';
-    if (!is_file($caminho)) {
-        responder(500, ['erro' => 'Servidor não configurado.']);
+    foreach ([__DIR__ . '/config.php', __DIR__ . '/config.example.php'] as $caminho) {
+        if (is_file($caminho)) {
+            $config = require $caminho;
+            if (is_array($config)) {
+                return $config;
+            }
+        }
     }
-    return require $caminho;
+
+    responder(500, ['erro' => 'Servidor não configurado.']);
 }
 
 function responder(int $status, array $dados): never
@@ -322,6 +335,115 @@ function ipDoVisitante(array $config): string
     }
 
     return (string) ($_SERVER['REMOTE_ADDR'] ?? '');
+}
+
+/**
+ * Soma quanto uma composição de pedido deveria ter custado.
+ *
+ * Serve para conferir o valor realmente pago contra o que o pedido diz —
+ * ninguém paga R$ 9,90 e recebe o pacote completo.
+ */
+function totalDoPedido(array $config, array $pedido): float
+{
+    $planos = is_array($config['planos'] ?? null) ? $config['planos'] : [];
+    $bumps  = is_array($config['bumps'] ?? null) ? $config['bumps'] : [];
+
+    $total = (float) ($planos[(string) ($pedido['plano'] ?? '')]['valor'] ?? 0);
+
+    foreach ((array) ($pedido['bumps'] ?? []) as $bumpId) {
+        $total += (float) ($bumps[(string) $bumpId]['valor'] ?? 0);
+    }
+
+    return round($total, 2);
+}
+
+/**
+ * Composição da compra dentro do external_id_client.
+ *
+ * O webhook recebe da ZuckPay apenas o external_id_client. Em hospedagem
+ * tradicional a composição está gravada em storage/, mas em serverless o disco
+ * é apagado entre execuções — então ela viaja também no próprio id, assim:
+ *
+ *   ENEM-mat-bio-hisred-a1b2c3d4e5f6
+ *   |    |   |   |      |
+ *   |    |   |   |      +-- id do pedido
+ *   |    |   |   +--------- bumps, em códigos de 3 letras colados
+ *   |    |   +------------- matéria escolhida (ou 0)
+ *   |    +----------------- plano
+ *   +---------------------- prefixo do produto
+ *
+ * Três letras por item porque os ids em uso são únicos nos 3 primeiros
+ * caracteres (mat, fis, qui, bio, his, geo, fil, por, lin, red).
+ */
+function codigoDoItem(string $id): string
+{
+    return substr($id, 0, 3);
+}
+
+function montarExternalId(
+    string $prefixo,
+    string $planoId,
+    string $materiaId,
+    array $bumpIds,
+    string $pedido
+): string {
+    $bumps = '';
+    foreach ($bumpIds as $bumpId) {
+        $bumps .= codigoDoItem((string) $bumpId);
+    }
+
+    return implode('-', [
+        $prefixo,
+        codigoDoItem($planoId),
+        $materiaId !== '' ? codigoDoItem($materiaId) : '0',
+        $bumps !== '' ? $bumps : '0',
+        $pedido,
+    ]);
+}
+
+/**
+ * Lê de volta a composição gravada no external_id_client.
+ *
+ * @return array{plano:string, materia:?string, bumps:array<int,string>}|null
+ */
+function lerExternalId(array $config, string $externalId): ?array
+{
+    $partes = explode('-', $externalId);
+    if (count($partes) < 5) {
+        return null;
+    }
+
+    $mapa = static function (array $ids): array {
+        $saida = [];
+        foreach ($ids as $id) {
+            $saida[codigoDoItem((string) $id)] = (string) $id;
+        }
+        return $saida;
+    };
+
+    $planos   = $mapa(array_keys(is_array($config['planos'] ?? null) ? $config['planos'] : []));
+    $materias = $mapa(array_keys(is_array($config['materias'] ?? null) ? $config['materias'] : []));
+    $bumps    = $mapa(array_keys(is_array($config['bumps'] ?? null) ? $config['bumps'] : []));
+
+    $planoId = $planos[$partes[1]] ?? '';
+    if ($planoId === '') {
+        return null;
+    }
+
+    $bumpsLidos = [];
+    if ($partes[3] !== '0') {
+        foreach (str_split($partes[3], 3) as $codigo) {
+            if (isset($bumps[$codigo])) {
+                $bumpsLidos[] = $bumps[$codigo];
+            }
+        }
+    }
+
+    return [
+        'plano'   => $planoId,
+        'materia' => $partes[2] !== '0' ? ($materias[$partes[2]] ?? null) : null,
+        'bumps'   => $bumpsLidos,
+    ];
 }
 
 /**

@@ -27,6 +27,8 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
 // sobre os bytes exatos que chegaram.
 $corpoRaw = (string) file_get_contents('php://input');
 
+$assinaturaConferida = false;
+
 $segredo = (string) ($config['webhook_secret'] ?? '');
 if ($segredo !== '') {
     $header = (string) ($_SERVER['HTTP_X_ZUCKPAY_SIGNATURE'] ?? '');
@@ -36,6 +38,8 @@ if ($segredo !== '') {
         registrarErro('webhook', 'assinatura recusada: ' . $motivo);
         responder(401, ['erro' => 'Assinatura inválida.']);
     }
+
+    $assinaturaConferida = true;
 } else {
     registrarErro('webhook', 'webhook_secret não configurado — validando só pela API');
 }
@@ -100,8 +104,46 @@ $jaProcessado = transacaoJaRegistrada($config, $transactionId);
 $externalId = (string) ($transacao['external_id_client'] ?? ($corpo['external_id_client'] ?? ''));
 
 // O que foi comprado (plano, matéria e order bumps) foi gravado por
-// api/pix.php na criação da cobrança — é o que diz o que entregar.
+// api/pix.php na criação da cobrança.
 $pedido = $externalId !== '' ? lerPedido($config, $externalId) : null;
+
+// Em serverless o /tmp é apagado entre execuções, então o arquivo pode não
+// existir mais. A composição também viaja dentro do external_id_client: sem
+// ela, a entrega não saberia o que liberar.
+if ($pedido === null && $externalId !== '') {
+    $doId = lerExternalId($config, $externalId);
+
+    /**
+     * O external_id chega no corpo do POST, então sozinho ele não prova nada:
+     * alguém poderia pegar um transactionId realmente pago de R$ 9,90 e alegar
+     * que a compra era o pacote completo.
+     *
+     * Só vale se a assinatura da ZuckPay foi conferida (aí o id é o que nós
+     * mesmos geramos) ou se o valor pago na API bate com o que essa composição
+     * deveria ter custado.
+     */
+    if ($doId !== null) {
+        $esperado = totalDoPedido($config, $doId);
+        $pago     = (float) ($resposta['amount'] ?? $transacao['amount'] ?? 0);
+        $valorBate = $esperado > 0 && abs($pago - $esperado) < 0.01;
+
+        if ($assinaturaConferida || $valorBate) {
+            $pedido = $doId + [
+                'transactionId' => $transactionId,
+                'email'         => (string) ($transacao['email'] ?? ($resposta['email'] ?? '')),
+                'nome'          => (string) ($transacao['nome'] ?? ''),
+                'origem'        => 'external_id',
+            ];
+        } else {
+            registrarErro('webhook', sprintf(
+                'composição recusada para %s: pagou %.2f mas o pedido somaria %.2f, e a assinatura não foi conferida',
+                $transactionId,
+                $pago,
+                $esperado
+            ));
+        }
+    }
+}
 
 if (!$jaProcessado) {
     registrarPagamento($config, [

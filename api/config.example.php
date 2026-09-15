@@ -28,6 +28,19 @@ if ($configQueJaFunciona !== '' && is_file($configQueJaFunciona)) {
     $herdado = is_array($lido) ? $lido : [];
 }
 
+/**
+ * Plataforma serverless (Vercel, Netlify Functions, Lambda).
+ *
+ * Lá o disco do projeto é somente leitura: só /tmp aceita escrita. E não
+ * existe config.php (ele fica fora do git), então as credenciais vêm das
+ * variáveis de ambiente do projeto.
+ */
+$serverless = getenv('VERCEL') !== false || getenv('AWS_LAMBDA_FUNCTION_NAME') !== false;
+
+/** O próprio domínio que está respondendo, para não precisar repetir no config. */
+$dominio = (string) ($_SERVER['HTTP_HOST'] ?? '');
+$esteSite = $dominio !== '' ? 'https://' . $dominio : '';
+
 return [
     /**
      * Credenciais da ZuckPay (painel > Integrações > API keys).
@@ -190,9 +203,15 @@ return [
      */
     'atras_de_proxy' => false,
 
-    // URL pública que a ZuckPay chama quando o pagamento muda de status.
-    // Cadastre-a também em Integrações > Webhooks no painel.
-    'webhook_url' => 'https://SEU-DOMINIO.com.br/api/webhook.php',
+    /**
+     * URL pública que a ZuckPay chama quando o pagamento muda de status.
+     * Cadastre-a também em Integrações > Webhooks no painel.
+     *
+     * Por padrão é montada com o domínio que está respondendo, então funciona
+     * sem editar nada. Para fixar, use a variável ZUCKPAY_WEBHOOK_URL.
+     */
+    'webhook_url' => getenv('ZUCKPAY_WEBHOOK_URL')
+        ?: ($esteSite !== '' ? $esteSite . '/api/webhook.php' : 'https://SEU-DOMINIO.com.br/api/webhook.php'),
 
     /**
      * Webhook Secret — gerado no painel em Integrações > Webhook Secret.
@@ -203,16 +222,32 @@ return [
      * Vazio, os postbacks continuam chegando sem assinatura e a validação
      * fica só por reconsulta à API.
      */
-    'webhook_secret' => $herdado['webhook_secret'] ?? '',
+    'webhook_secret' => getenv('ZUCKPAY_WEBHOOK_SECRET') ?: ($herdado['webhook_secret'] ?? ''),
 
-    // Origens autorizadas a chamar estes endpoints (CORS).
-    'allowed_origins' => [
-        'https://SEU-DOMINIO.com.br',
-        'https://www.SEU-DOMINIO.com.br',
-    ],
+    /**
+     * Origens autorizadas a chamar estes endpoints (CORS).
+     *
+     * O próprio domínio entra sozinho, então página e API no mesmo lugar
+     * funcionam sem ajuste. Para liberar outro domínio (página estática em um
+     * host e API em outro), use ZUCKPAY_ORIGENS com as URLs separadas por
+     * vírgula.
+     */
+    'allowed_origins' => array_values(array_filter(array_unique(array_merge(
+        $esteSite !== '' ? [$esteSite] : [],
+        array_map('trim', explode(',', (string) getenv('ZUCKPAY_ORIGENS'))),
+        ['https://SEU-DOMINIO.com.br']
+    )))),
 
-    // Onde gravar o log de pagamentos confirmados.
-    'log_path' => __DIR__ . '/../storage/pagamentos.log',
+    /**
+     * Onde gravar pedidos, entregas e o log de pagamentos.
+     *
+     * Em serverless o projeto é somente leitura, então vai para /tmp — que é
+     * apagado entre execuções. Por isso a composição do pedido também viaja no
+     * external_id_client da cobrança: o webhook não depende deste arquivo.
+     */
+    'log_path' => $serverless
+        ? sys_get_temp_dir() . '/mapasenem/pagamentos.log'
+        : __DIR__ . '/../storage/pagamentos.log',
 
     /**
      * Modo diagnóstico.
@@ -228,5 +263,13 @@ return [
      * Token do api/diagnostico.php. Troque por uma string aleatória.
      * Sem ele o diagnóstico responde 404.
      */
-    'debug_token' => '',
+    'debug_token' => getenv('ZUCKPAY_DEBUG_TOKEN') ?: '',
+
+    /**
+     * Segredo que assina o token de acesso do mini app.
+     *
+     * Gere uma string aleatória longa (ex.: `openssl rand -hex 32`) e guarde em
+     * MAPASENEM_ACESSO_SECRET. Trocar este valor invalida os links já enviados.
+     */
+    'acesso_secret' => getenv('MAPASENEM_ACESSO_SECRET') ?: '',
 ];
